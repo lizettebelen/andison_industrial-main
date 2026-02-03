@@ -23,6 +23,12 @@
             background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
             color: white;
             padding: 14px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            width: 100%;
         }
 
         .header-top {
@@ -237,6 +243,7 @@
             position: relative;
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(10px);
+            overflow: visible;
         }
 
         .nav-inner {
@@ -278,7 +285,7 @@
             padding: 0;
         }
 
-        .nav-list li { }
+        .nav-list li { position: relative; }
 
         .nav-list a {
             color: white;
@@ -295,6 +302,94 @@
         .nav-list a.active {
             border-bottom: 3px solid #00d4aa;
             padding-bottom: 9px;
+        }
+
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: white;
+            min-width: 280px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            z-index: 110;
+            padding: 16px;
+            margin-top: 8px;
+        }
+
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid white;
+            filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.05));
+        }
+
+        .nav-list > li:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-dropdown h4 {
+            color: #2b00d9;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .nav-dropdown ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-dropdown ul li {
+            margin: 0;
+        }
+
+        .nav-dropdown ul a {
+            color: #333;
+            font-size: 14px;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 4px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-dropdown ul a:hover {
+            background: #f0f5ff;
+            color: #2b00d9;
+        }
+
+        .nav-dropdown p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        nav li:nth-child(3) .nav-dropdown {
+            min-width: 650px;
+            max-width: 650px;
+            padding: 24px 28px;
+        }
+
+        nav li:nth-child(3) .nav-dropdown ul {
+            display: grid !important;
+            grid-template-columns: repeat(5, 1fr) !important;
+            gap: 12px 20px !important;
+            margin-top: 16px !important;
         }
 
         /* Hero Section */
@@ -736,7 +831,7 @@
         .sidebar-overlay {
             position: fixed;
             left: 0;
-            top: 0;
+            top: calc(14px + 50px + 14px + 12px + 52px);
             bottom: 0;
             width: 300px;
             max-width: 88%;
@@ -833,12 +928,95 @@
             <div class="nav-inner">
                 <button id="browseToggle" class="browse-toggle"><span class="hamburger">☰</span> BROWSE PRODUCTS</button>
                 <ul class="nav-list">
-                    <li><a href="home.php" class="active">Home</a></li>
-                    <li><a href="aboutus.php">About Us</a></li>
-                    <li><a href="brands.php">Brands</a></li>
-                    <li><a href="industries.php">Industries</a></li>
-                    <li><a href="services.php">Services</a></li>
-                    <li><a href="contact.php">Contact Us</a></li>
+                    <li>
+                        <a href="home.php" class="active">Home</a>
+                        <div class="nav-dropdown">
+                            <h4>Welcome</h4>
+                            <p>Discover our complete range of industrial welding solutions and equipment.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="aboutus.php">About Us</a>
+                        <div class="nav-dropdown">
+                            <h4>Our Company</h4>
+                            <ul>
+                                <li><a href="aboutus.php#mission">Our Mission</a></li>
+                                <li><a href="aboutus.php#history">Company History</a></li>
+                                <li><a href="aboutus.php#team">Our Team</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="brands.php">Brands</a>
+                        <div class="nav-dropdown">
+                            <h4>Featured Brands</h4>
+                            <ul>
+                                <li><a href="brands.php#panasonic-connect">Panasonic Connect</a></li>
+                                <li><a href="brands.php#kobelco">Kobelco</a></li>
+                                <li><a href="brands.php#metrode">Metrode</a></li>
+                                <li><a href="brands.php#dryrod-ii">DryRod. II</a></li>
+                                <li><a href="brands.php#weldcraft">Weldcraft</a></li>
+                                 <li><a href="brands.php#weldcraft">Truweld</a></li>
+                                  <li><a href="brands.php#weldcraft">Arcair</a></li>
+                                  <li><a href="brands.php#weldcraft">Magnaflux</a></li>
+                                  <li><a href="brands.php#weldcraft">Tempilstik</a></li>
+                                  <li><a href="brands.php#weldcraft">Tanaka</a></li>
+                                  <li><a href="brands.php#weldcraft">Chiyoda</a></li>
+                                  <li><a href="brands.php#weldcraft">Yutaka</a></li>
+                                  <li><a href="brands.php#weldcraft">Hard Workers</a></li>
+                                  <li><a href="brands.php#weldcraft">Soyer</a></li>
+                                  <li><a href="brands.php#weldcraft">Aquasol</a></li>
+                                  <li><a href="brands.php#weldcraft">SK</a></li>
+                                  <li><a href="brands.php#weldcraft">Coppus</a></li>
+                                  <li><a href="brands.php#weldcraft">GWI</a></li>
+                                  <li><a href="brands.php#weldcraft">RAC</a></li>
+                                  <li><a href="brands.php#weldcraft">Weldas</a></li>
+                                  <li><a href="brands.php#weldcraft">Uvex</a></li>
+                                  <li><a href="brands.php#weldcraft">Aces</a></li>
+                                  <li><a href="brands.php#weldcraft">Microgard</a></li>
+                                  <li><a href="brands.php#weldcraft">Ansell</a></li>
+                                  <li><a href="brands.php#weldcraft">Alfra</a></li>
+                                  <li><a href="brands.php#weldcraft">Bosch</a></li>
+                                  <li><a href="brands.php#weldcraft">Makita</a></li>
+                                  <li><a href="brands.php#weldcraft">Weller</a></li>
+                                  <li><a href="brands.php#weldcraft">Garryson</a></li>
+                                  <li><a href="brands.php#weldcraft">Spilfyter</a></li>
+                                  <li><a href="brands.php#weldcraft">Dalo</a></li>
+                                  <li><a href="brands.php#weldcraft">Motolite</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="industries.php">Industries</a>
+                        <div class="nav-dropdown">
+                            <h4>Industries We Serve</h4>
+                            <ul>
+                                <li><a href="industries.php#manufacturing">Manufacturing</a></li>
+                                <li><a href="industries.php#construction">Construction</a></li>
+                                <li><a href="industries.php#automotive">Automotive</a></li>
+                                <li><a href="industries.php#shipbuilding">Shipbuilding</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="services.php">Services</a>
+                        <div class="nav-dropdown">
+                            <h4>Our Services</h4>
+                            <ul>
+                                <li><a href="services.php#consultation">Technical Consultation</a></li>
+                                <li><a href="services.php#training">Training Programs</a></li>
+                                <li><a href="services.php#maintenance">Equipment Maintenance</a></li>
+                                <li><a href="services.php#support">After-Sales Support</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="contact.php">Contact Us</a>
+                        <div class="nav-dropdown">
+                            <h4>Get In Touch</h4>
+                            <p>Reach out to our team for inquiries, quotes, or technical support.</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -865,24 +1043,24 @@
 
     <!-- Hero Section -->
     <section class="hero" id="heroSlider">
-        <div class="hero-slide active" style="background-image: url('assets/photo_2026-02-02_ 14-29-26.jpg');">
+        <div class="hero-slide active" style="background-image: url('assets/HOME/photo_2026-02-02_ 14-29-26.jpg');">
             <div class="hero-content">
-                <div class="hero-thumb" style="background-image: url('assets/photo_2026-02-02_14-29-26.jpg');"></div>
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26.jpg');"></div>
             </div>
         </div>
-        <div class="hero-slide" style="background-image: url('assets/photo_2026-02-02_14-29-26 (2).jpg');">
+        <div class="hero-slide" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (2).jpg');">
             <div class="hero-content">
-                <div class="hero-thumb" style="background-image: url('assets/photo_2026-02-02_14-29-26 (2).jpg');"></div>
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (2).jpg');"></div>
             </div>
         </div>
-        <div class="hero-slide" style="background-image: url('assets/photo_2026-02-02_14-29-26 (3).jpg');">
+        <div class="hero-slide" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (3).jpg');">
             <div class="hero-content">
-                <div class="hero-thumb" style="background-image: url('assets/photo_2026-02-02_14-29-26 (3).jpg');"></div>
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (3).jpg');"></div>
             </div>
         </div>
-        <div class="hero-slide" style="background-image: url('assets/photo_2026-02-02_14-29-26 (4).jpg');">
+        <div class="hero-slide" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (4).jpg');">
             <div class="hero-content">
-                <div class="hero-thumb" style="background-image: url('assets/photo_2026-02-02_14-29-26 (4).jpg');"></div>
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (4).jpg');"></div>
             </div>
         </div>
         <div class="hero-indicators">

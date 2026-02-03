@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - ANDISON INDUSTRIAL</title>
+    <title>Contact Us - ANDISON INDUSTRIAL</title>
     <style>
         * {
             margin: 0;
@@ -15,6 +15,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            background: #fff;
+            padding-top: 140px;
         }
 
         /* Header */
@@ -22,6 +24,12 @@
             background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
             color: white;
             padding: 14px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .header-top {
@@ -64,6 +72,7 @@
             gap: 14px;
             font-size: 13px;
             flex: 0 0 auto;
+            height: 44px;
         }
 
         .contact-link {
@@ -95,7 +104,6 @@
             transform: translateX(-50%) scaleX(1);
         }
 
-        /* Contact popover */
         .contact-dropdown {
             position: relative;
             display: inline-block;
@@ -208,10 +216,6 @@
             color: #666;
         }
 
-        .search-btn {
-            display: none;
-        }
-
         .inquiry-btn {
             background: #00d894;
             color: #002b2b;
@@ -221,6 +225,8 @@
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
         }
 
         .inquiry-btn:hover { filter: brightness(0.95); }
@@ -278,7 +284,13 @@
             padding: 0;
         }
 
-        .nav-list li { position: relative; }
+        .nav-list > li {
+            position: relative;
+        }
+
+        .nav-list li {
+            position: relative;
+        }
 
         .nav-list a {
             color: white;
@@ -434,181 +446,97 @@
         .sidebar-list a:hover { background:#fbfdff; color:#0015d1; }
         .sidebar-icon { color:#4a21d9; width:28px; text-align:center; }
 
-        .sidebar-close { background: transparent; border: none; color:#666; font-weight:700; cursor:pointer; position:absolute; right:12px; top:12px; }
+        .sidebar-close { 
+            background: transparent; 
+            border: none; 
+            color:#666; 
+            font-weight:700; 
+            cursor:pointer; 
+            position:absolute; 
+            right:12px; 
+            top:12px;
+            font-size: 24px;
+            padding: 4px 8px;
+        }
 
         /* Main Content */
         .main-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 60px 20px;
         }
 
         .page-title {
+            text-align: center;
             font-size: 42px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 30px;
-            text-align: center;
+            margin-bottom: 50px;
         }
 
-        .page-subtitle {
-            font-size: 18px;
-            color: #666;
-            text-align: center;
-            margin-bottom: 60px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        /* Location Cards */
+        .locations-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
         }
 
-        .about-section {
-            margin-bottom: 60px;
+        .location-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        .section-title {
+        .location-map {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        .location-info {
+            padding: 30px;
+        }
+
+        .location-name {
             font-size: 28px;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-            border-left: 4px solid #0015d1;
-            padding-left: 20px;
-        }
-
-        .section-content {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.8;
+            color: #2b00d9;
             margin-bottom: 20px;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 8px;
-            border-left: 4px solid #0015d1;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 21, 209, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 40px;
+        .info-item {
             margin-bottom: 15px;
         }
 
-        .feature-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .feature-text {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .values-section {
-            background: linear-gradient(135deg, #e0f7f4 0%, #d0f0ec 100%);
-            padding: 50px;
-            border-radius: 8px;
-            margin-bottom: 60px;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .value-item {
-            background: white;
-            padding: 25px;
-            border-radius: 6px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .value-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .value-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .value-text {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .team-section {
-            margin-top: 60px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .team-member {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .team-member:hover {
-            transform: translateY(-5px);
-        }
-
-        .team-avatar {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #0015d1 0%, #0066cc 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: white;
-        }
-
-        .team-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .team-name {
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
+        .info-label {
+            font-weight: 600;
+            color: #555;
             margin-bottom: 5px;
         }
 
-        .team-role {
-            font-size: 13px;
-            color: #0015d1;
-            font-weight: 600;
+        .info-value {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .info-value a {
+            color: #2b00d9;
+            text-decoration: none;
+        }
+
+        .info-value a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-note {
+            background: #f0f5ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
         }
 
         /* Footer */
@@ -616,11 +544,11 @@
             background: #0015d1;
             color: white;
             padding: 30px 20px;
-            margin-top: 80px;
+            margin-top: 60px;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -641,7 +569,7 @@
         .footer-links a {
             color: white;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 10px;
             transition: color 0.3s;
         }
 
@@ -649,35 +577,28 @@
             color: #00d4aa;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-inner { justify-content: space-between; padding-left: 20px; }
-            .nav-list { position: static; transform: none; left: auto; margin: 8px auto 0; justify-content: center; flex-wrap: wrap; gap: 15px; }
-            .browse-toggle { position: static; transform: none; left: auto; top: auto; padding: 6px 10px; }
-            
             .page-title {
                 font-size: 32px;
             }
 
-            .section-title {
-                font-size: 22px;
+            .location-name {
+                font-size: 24px;
             }
 
-            .values-section {
-                padding: 30px 20px;
+            .location-info {
+                padding: 20px;
             }
 
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
+            .nav-inner {
+                padding-left: 20px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
     <?php
-        // Set page title
-        $page_title = "About Us";
         $company_name = "ANDISON INDUSTRIAL";
         
         // Contact information
@@ -691,7 +612,7 @@
     <header>
         <div class="header-top">
             <div class="logo">
-                <div class="logo-box"><img src="assets/image-removebg-preview.png" alt="Andison Industrial" /></div>
+                <div class="logo-box"><img src="assets/HOME/image-removebg-preview.png" alt="Andison Industrial" /></div>
             </div>
 
             <div class="search-bar">
@@ -732,7 +653,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="aboutus.php" class="active">About Us</a>
+                        <a href="aboutus.php">About Us</a>
                         <div class="nav-dropdown">
                             <h4>Our Company</h4>
                             <ul>
@@ -807,7 +728,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="contact.php">Contact Us</a>
+                        <a href="contact.php" class="active">Contact Us</a>
                         <div class="nav-dropdown">
                             <h4>Get In Touch</h4>
                             <p>Reach out to our team for inquiries, quotes, or technical support.</p>
@@ -824,66 +745,91 @@
         <button class="sidebar-close" id="closeSidebar">✕</button>
         <h3>Categories</h3>
         <ul class="sidebar-list">
-            <li><a href="#arc-handmetal-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc HandMetal Machine</a></li>
-            <li><a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc HandMetal Robots</a></li>
-            <li><a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-battery-half"></i></span> Batteries</a></li>
-            <li><a href="#drilling-lifting"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-wrench"></i></span> Drilling and Lifting</a></li>
-            <li><a href="#gas-detectors"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span> Portable Gas Detectors</a></li>
-            <li><a href="#ventilators"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span> Portable Ventilators</a></li>
-            <li><a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span> Power Tools</a></li>
-            <li><a href="#protection-safety"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span> Protection and Safety</a></li>
-            <li><a href="#handmetal-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> HandMetal Accessories</a></li>
-            <li><a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> HandMetal Consumables</a></li>
+            <li><a href="#arc-welding-machine"><span class="sidebar-icon">🔧</span> Arc Welding Machine</a></li>
+            <li><a href="#arc-welding-robots"><span class="sidebar-icon">🤖</span> Arc Welding Robots</a></li>
+            <li><a href="#batteries"><span class="sidebar-icon">🔋</span> Batteries</a></li>
+            <li><a href="#drilling-lifting"><span class="sidebar-icon">🏗️</span> Drilling and Lifting</a></li>
+            <li><a href="#gas-detectors"><span class="sidebar-icon">📊</span> Portable Gas Detectors</a></li>
+            <li><a href="#ventilators"><span class="sidebar-icon">💨</span> Portable Ventilators</a></li>
+            <li><a href="#power-tools"><span class="sidebar-icon">🔩</span> Power Tools</a></li>
+            <li><a href="#protection-safety"><span class="sidebar-icon">🛡️</span> Protection and Safety</a></li>
+            <li><a href="#welding-accessories"><span class="sidebar-icon">⚙️</span> Welding Accessories</a></li>
+            <li><a href="#welding-consumables"><span class="sidebar-icon">📦</span> Welding Consumables</a></li>
         </ul>
     </aside>
 
     <!-- Main Content -->
     <div class="main-content">
-        <h1 class="page-title">About Andison Industrial</h1>
-        <p class="page-subtitle">Leading provider of high-quality industrial solutions and equipment for over two decades.</p>
-
-        <!-- Company Overview Section -->
-        <div class="about-section">
-            <h2 class="section-title">COMPANY</h2>
-            <p class="section-content">
-                Andison Industrial Sales Inc. stands as a significant industrial supplier for leading companies across the Philippines. Strategically situated amidst the expansive industrial landscape south of Metro Manila. Andison serves multi-national and export giants within the automotive and motorcycle assembly factories, power generation, oil refineries, petrochemical plant, metal fabrications, mining, shipyard, and other top contractors.
-            </p>
-            <p class="section-content">
-                With specialize knowledge, Andison embraces the evolution of technology and consistently adopts new trends. We offer various solutions to our clientele by providing high quality products, technical solutions, support and services, given consultation to meet the evolving needs of our clients. 
-            </p>
-            <p class="section-content">
-                Today, as representatives of various world-class brands, Andison has one of the industry’s broadest portfolio of products. Our range of products includes Robotic & Automated Welding Systems, Welding & Cutting Machines, Equipment and Consumables, Industrial Tools & Supplies, Gas Detector & Monitoring Devices, Safety Products, PPEs and many others.
-            </p>
-        </div>
-
-        <!-- Mission & Vision -->
-        <div class="about-section">
-            <div class="features-grid">
-                <div class="feature-card" style="border-left-color: #00d894;">
-                    <div class="feature-icon">🎯</div>
-                    <div class="feature-title">Our Mission</div>
-                    <p class="feature-text">To deliver innovative solutions and high-quality products to businesses in the Philippines at cost-effective prices. We aimed to cultivate lasting relationships with our industrial clients, ensuing mutual growth and success.</p>
+        <h1 class="page-title">Contact Us</h1>
+        
+        <div class="locations-container">
+            <!-- Manila Location -->
+            <div class="location-card">
+                <iframe 
+                    class="location-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4385891727774!2d121.03427731483058!3d14.574729789827282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c90264a0d923%3A0x7a9b6c7e5a8b4c6d!2sManila%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+                <div class="location-info">
+                    <h2 class="location-name">MANILA</h2>
+                    <div class="info-item">
+                        <div class="info-label">Address:</div>
+                        <div class="info-value">917-919 Luzon Street, Barangay 761 Zone 034 1012 Tondo ULNCR, City of Manila, First District, Philippines</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone:</div>
+                        <div class="info-value">
+                            <a href="tel:+63284894958">(+632) 8434-4958</a> / 
+                            <a href="tel:+63288247874">(+632) 8824-2874</a> / 
+                            <a href="tel:+63288348598">(+632) 8834-8598</a> / 
+                            <a href="tel:+63288342873">(+632) 8834-2873</a> / 
+                            <a href="tel:+63288348598">(+632) 8834-8598</a> / 
+                            <a href="tel:+63288349224">(+632) 8873-9224</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card" style="border-left-color: #0015d1;">
-                    <div class="feature-icon">🚀</div>
-                    <div class="feature-title">Our Vision</div>
-                    <p class="feature-text">To contribute to our country’s industrialization by being a major supplier to the industries.</p>
+            </div>
+
+            <!-- Calabarzon Location -->
+            <div class="location-card">
+                <iframe 
+                    class="location-map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.6851890468946!2d121.05897431482368!3d13.756671900993478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd052964f7d5c9%3A0x784e8a6e0c6f8f8f!2sBatangas%20City%2C%20Batangas!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+                <div class="location-info">
+                    <h2 class="location-name">CALABARZON</h2>
+                    <div class="info-item">
+                        <div class="info-label">Address:</div>
+                        <div class="info-value">258-P. Zamora Street, Barangay 16, 4200 Batangas City, Batangas Philippines</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone:</div>
+                        <div class="info-value">
+                            <a href="tel:+634334124126">(+6343) 425 4126</a> / 
+                            <a href="tel:+63433417233">(+6343) 723 3198</a>
+                        </div>
+                    </div>
+                    <div class="contact-note">
+                        Do you have questions about how we can help your company? Send us an email and we'll get in touch shortly.
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
+            <div class="footer-copyright">
+                <p>&copy; 2026 <?php echo $company_name; ?>. All rights reserved.</p>
+            </div>
             <div class="footer-links">
                 <a href="#privacy">Privacy Policy</a>
                 <a href="#terms">Terms of Service</a>
                 <a href="#sitemap">Sitemap</a>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2026 <?php echo $company_name; ?>. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -916,10 +862,8 @@
             if(overlay) overlay.addEventListener('click', closeSidebar);
             document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSidebar(); });
         })();
-    </script>
 
-    <script>
-        // Manage aria states for contact dropdown (improves accessibility)
+        // Contact dropdown functionality
         (function(){
             var dropdowns = document.querySelectorAll('.contact-dropdown');
             dropdowns.forEach(function(dd){
@@ -952,4 +896,3 @@
     </script>
 </body>
 </html>
-    

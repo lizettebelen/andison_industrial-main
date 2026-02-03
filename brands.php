@@ -16,6 +16,11 @@
           line-height: 1.6;
           color: #333;
           background: #fff;
+          scroll-behavior: smooth;
+      }
+
+      html {
+          scroll-padding-top: 150px;
       }
 
           /* Header */
@@ -23,6 +28,8 @@
             background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
             color: white;
             padding: 14px 0;
+            position: relative;
+            z-index: 100;
         }
 
         .header-top {
@@ -243,7 +250,7 @@
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 50 20px;
             display: flex;
             align-items: center;
             min-height: 52px;
@@ -278,6 +285,10 @@
             padding: 0;
         }
 
+        .nav-list > li {
+            position: relative;
+        }
+
         .nav-list a {
             color: white;
             text-decoration: none;
@@ -295,10 +306,112 @@
             padding-bottom: 9px;
         }
 
+        /* Navigation Dropdown */
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: white;
+            min-width: 280px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            z-index: 110;
+            padding: 16px;
+            margin-top: 8px;
+        }
+
+        .nav-dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid white;
+            filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.05));
+        }
+
+        .nav-list > li:hover .nav-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav-dropdown h4 {
+            color: #2b00d9;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .nav-dropdown ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-dropdown ul li {
+            margin: 0;
+        }
+
+        .nav-dropdown ul a {
+            color: #333;
+            font-size: 14px;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 4px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-dropdown ul a:hover {
+            background: #f0f5ff;
+            color: #2b00d9;
+        }
+
+        .nav-dropdown p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Brands dropdown specific styling */
+        nav li:nth-child(3) .nav-dropdown {
+            min-width: 650px;
+            max-width: 650px;
+            max-height: none;
+            overflow: visible;
+            padding: 24px 28px;
+        }
+
+        /* Grid layout for brands dropdown list */
+        nav li:nth-child(3) .nav-dropdown ul {
+            display: grid !important;
+            grid-template-columns: repeat(5, 1fr) !important;
+            gap: 12px 20px !important;
+            margin-top: 16px !important;
+        }
+
+        nav li:nth-child(3) .nav-dropdown ul li {
+            margin: 0 !important;
+        }
+
+        nav li:nth-child(3) .nav-dropdown ul a {
+            padding: 6px 8px !important;
+            font-size: 14px !important;
+        }
+
         /* Overlay sidebar */
         .overlay-backdrop {
             position: fixed;
-            inset: 0;
+            inset: 0;  
             background: rgba(0,0,0,0.08);
             opacity: 0;
             visibility: hidden;
@@ -314,7 +427,7 @@
         .sidebar-overlay {
             position: fixed;
             left: 0;
-            top: 0;
+            top: calc(14px + 50px + 14px + 12px + 52px);
             bottom: 0;
             width: 300px;
             max-width: 88%;
@@ -361,9 +474,9 @@
         /* BRANDS DROPDOWN – FINAL SPACING FIX */
           .brands-list {
               display: grid;
-              grid-template-columns: repeat(6, 1fr);
+              grid-template-columns: repeat(4, 1fr);
               row-gap: 12px;        
-              column-gap: 30px;      /* pagitan bawat column */
+              column-gap: 24px;
               margin-top: 28px;
           }
 
@@ -393,10 +506,12 @@
               max-width: 1400px;
               margin: 0 auto;
               padding: 60px 20px;
+              position: relative;
+              z-index: 1;
           }
 
           .page-title {
-              text-align: left;
+              text-align: center;
               font-size: 42px;
               font-weight: bold;
               color: #333;
@@ -412,7 +527,7 @@
 
           /* Brand List Sidebar */
           .brand-sidebar {
-              flex: 0 0 200px;
+              flex: 0 500px 200px;
               background: #f8f9fa;
               padding: 20px;
               border-radius: 8px;
@@ -483,49 +598,45 @@
               z-index: 1;
           }
 
+          /* Make brand card anchors look and act like the card */
+          a.brand-card {
+              text-decoration: none;
+              color: inherit;
+              display: flex;
+          }
+
+          /* Overlay shown on hover with the brand name and clickable */
+          .brand-overlay {
+              position: absolute;
+              inset: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: rgba(0,0,0,0.62);
+              color: #ffffff;
+              opacity: 0;
+              transition: opacity 0.18s ease;
+              border-radius: 8px;
+              padding: 12px;
+              font-weight: 700;
+              text-align: center;
+              pointer-events: none;
+          }
+
+          .brand-card:hover .brand-overlay {
+              opacity: 1;
+              pointer-events: auto;
+          }
+
           .brand-card:hover {
               transform: translateY(-5px);
               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
               z-index: 1000;
           }
 
-          .brand-card::before {
-              content: attr(data-brand-name) '\A' attr(data-brand-description);
-              position: absolute;
-              bottom: 100%;
-              left: 50%;
-              transform: translateX(-50%) translateY(-8px);
-              background: #0015d1;
-              color: white;
-              padding: 12px 20px;
-              border-radius: 6px;
-              font-size: 13px;
-              font-weight: 600;
-              white-space: pre;
-              text-align: center;
-              opacity: 0;
-              pointer-events: none;
-              transition: opacity 0.3s ease, transform 0.3s ease;
-              z-index: 1001;
-              margin-bottom: 8px;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-              line-height: 1.5;
-              max-width: 300px;
-          }
+         
 
-          .brand-card::after {
-              content: '';
-              position: absolute;
-              bottom: 100%;
-              left: 50%;
-              transform: translateX(-50%) translateY(-3px);
-              border: 6px solid transparent;
-              border-top-color: #0015d1;
-              opacity: 0;
-              pointer-events: none;
-              transition: opacity 0.3s ease, transform 0.3s ease;
-              z-index: 1001;
-          }
+          
 
           .brand-card:hover::before {
               opacity: 1;
@@ -539,14 +650,14 @@
 
           .brand-logo {
               width: 100%;
-              height: 80px;   /* smaller */
+              height: 120px;
               display: flex;
               align-items: center;
               justify-content: center;
               margin-bottom: 8px;
               background: #f8f8f8;
               border-radius: 4px;
-              padding: 8px;
+              padding: 12px;
           }
 
           .brand-logo img {
@@ -571,6 +682,51 @@
               font-size: 12px;
               color: #666;
               line-height: 1.3;
+          }
+
+          /* Hide cards after 20th initially */
+          .brand-card:nth-child(n+21) {
+              display: none;
+          }
+
+          .brand-card.visible {
+              display: flex !important;
+          }
+
+          /* See More Button */
+          .see-more-container {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              margin-top: 40px;
+              margin-bottom: 20px;
+          }
+
+          .see-more-btn {
+              background: #2b00d9;
+              color: white;
+              border: none;
+              padding: 12px 40px;
+              border-radius: 6px;
+              font-size: 16px;
+              font-weight: 600;
+              cursor: pointer;
+              transition: background 0.3s ease, transform 0.2s ease;
+              box-shadow: 0 4px 12px rgba(43, 0, 217, 0.3);
+          }
+
+          .see-more-btn:hover {
+              background: #1f0099;
+              transform: translateY(-2px);
+              box-shadow: 0 6px 16px rgba(43, 0, 217, 0.4);
+          }
+
+          .see-more-btn:active {
+              transform: translateY(0);
+          }
+
+          .see-more-btn.hidden {
+              display: none;
           }
 
           /* Footer */
@@ -735,7 +891,6 @@
               }
           }
           .inquiry-btn {
-    height: 44px;
     display: flex;
     align-items: center;
 }
@@ -799,7 +954,7 @@
 
               nav li:nth-child(3) .nav-dropdown {
                   max-width: 100%;
-                  min-width: 300px;
+                  min-width: 750px;
               }
           }
       </style>
@@ -852,12 +1007,97 @@
               <div class="nav-inner">
                   <button id="browseToggle" class="browse-toggle"><span class="hamburger">☰</span> BROWSE PRODUCTS</button>
                   <ul class="nav-list">
-                      <li><a href="home.php">Home</a></li>
-                      <li><a href="aboutus.php">About Us</a></li>
-                      <li><a href="brands.php" class="active">Brands</a></li>
-                      <li><a href="#industries">Industries</a></li>
-                      <li><a href="#services">Services</a></li>
-                      <li><a href="#contact">Contact Us</a></li>
+                      <li>
+                          <a href="home.php">Home</a>
+                          <div class="nav-dropdown">
+                              <h4>Welcome</h4>
+                              <p>Discover our complete range of industrial welding solutions and equipment.</p>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="aboutus.php">About Us</a>
+                          <div class="nav-dropdown">
+                              <h4>Our Company</h4>
+                              <ul>
+                                  <li><a href="aboutus.php#mission">Our Mission</a></li>
+                                  <li><a href="aboutus.php#history">Company History</a></li>
+                                  <li><a href="aboutus.php#team">Our Team</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="brands.php" class="active">Brands</a>
+                          <div class="nav-dropdown">
+                              <h4>Featured Brands</h4>
+                              <ul>
+                                  <li><a href="brands.php#panasonic">Panasonic Connect</a></li>
+                                  <li><a href="brands.php#kobelco">Kobelco</a></li>
+                                  <li><a href="brands.php#metrode">Metrode</a></li>
+                                  <li><a href="brands.php#weldcraft">DryRod. II</a></li>
+                                  <li><a href="brands.php#weldcraft">Weldcraft</a></li>
+                                  <li><a href="brands.php#weldcraft">Truweld</a></li>
+                                  <li><a href="brands.php#weldcraft">Arcair</a></li>
+                                  <li><a href="brands.php#weldcraft">Magnaflux</a></li>
+                                  <li><a href="brands.php#weldcraft">Tempilstik</a></li>
+                                  <li><a href="brands.php#weldcraft">Tanaka</a></li>
+                                  <li><a href="brands.php#weldcraft">Chiyoda</a></li>
+                                  <li><a href="brands.php#weldcraft">Yutaka</a></li>
+                                  <li><a href="brands.php#weldcraft">Hard Workers</a></li>
+                                  <li><a href="brands.php#weldcraft">Soyer</a></li>
+                                  <li><a href="brands.php#weldcraft">Aquasol</a></li>
+                                  <li><a href="brands.php#weldcraft">SK</a></li>
+                                  <li><a href="brands.php#weldcraft">Coppus</a></li>
+                                  <li><a href="brands.php#weldcraft">GWI</a></li>
+                                  <li><a href="brands.php#weldcraft">RAC</a></li>
+                                  <li><a href="brands.php#weldcraft">Weldas</a></li>
+                                  <li><a href="brands.php#weldcraft">Uvex</a></li>
+                                  <li><a href="brands.php#weldcraft">Aces</a></li>
+                                  <li><a href="brands.php#weldcraft">Microgard</a></li>
+                                  <li><a href="brands.php#weldcraft">Ansell</a></li>
+                                  <li><a href="brands.php#weldcraft">Alfra</a></li>
+                                  <li><a href="brands.php#weldcraft">Bosch</a></li>
+                                  <li><a href="brands.php#weldcraft">Makita</a></li>
+                                  <li><a href="brands.php#weldcraft">Weller</a></li>
+                                  <li><a href="brands.php#weldcraft">Garryson</a></li>
+                                  <li><a href="brands.php#weldcraft">Spilfyter</a></li>
+                                  <li><a href="brands.php#weldcraft">Dalo</a></li>
+                                  <li><a href="brands.php#weldcraft">Motolite</a></li>
+                            
+                                
+                              </ul>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="industries.php">Industries</a>
+                          <div class="nav-dropdown">
+                              <h4>Industries We Serve</h4>
+                              <ul>
+                                  <li><a href="industries.php#manufacturing">Manufacturing</a></li>
+                                  <li><a href="industries.php#construction">Construction</a></li>
+                                  <li><a href="industries.php#automotive">Automotive</a></li>
+                                  <li><a href="industries.php#shipbuilding">Shipbuilding</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="services.php">Services</a>
+                          <div class="nav-dropdown">
+                              <h4>Our Services</h4>
+                              <ul>
+                                  <li><a href="services.php#consultation">Technical Consultation</a></li>
+                                  <li><a href="services.php#training">Training Programs</a></li>
+                                  <li><a href="services.php#maintenance">Equipment Maintenance</a></li>
+                                  <li><a href="services.php#support">After-Sales Support</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                      <li>
+                          <a href="contact.php">Contact Us</a>
+                          <div class="nav-dropdown">
+                              <h4>Get In Touch</h4>
+                              <p>Reach out to our team for inquiries, quotes, or technical support.</p>
+                          </div>
+                      </li>
                   </ul>
               </div>
           </nav>
@@ -894,267 +1134,255 @@
               <!-- Row 1 -->
               <div class="brand-card" data-brand-name="Panasonic Connect">
                   <div class="brand-logo">
-                      <div class="brand-logo-text" style="color: #0066cc; font-size: 16px;">Panasonic</div>
+                      <img src="assets/brands/PANASONIC.jpg" alt="Panasonic Connect" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none; color: #0066cc; font-size: 16px;">Panasonic</div>
                   </div>
-                  <div class="brand-name">Panasonic Connect</div>
-                  <div class="brand-description">Arc Welding Robot & Machine</div>
+              </div>
+              <div class="brand-card" data-brand-name="Robot Systems">
+                  <div class="brand-logo">
+                      <img src="assets/brands/ROBOT SYSTEMS.jpg" alt="Robot Systems Peripherals" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none; color: #0066cc; font-size: 24px; font-weight: bold;">Robot Systems</div>
+                  </div>
               </div>
 
               <div class="brand-card" data-brand-name="Kobelco">
                   <div class="brand-logo">
-                      <div class="brand-logo-text" style="color: #0066cc; font-size: 24px; font-weight: bold;">K</div>
+                      <img src="assets/brands/KOBELCO.jpg" alt="Kobelco" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none; color: #0066cc; font-size: 24px; font-weight: bold;">K</div>
                   </div>
-                  <div class="brand-name">Kobelco</div>
-                  <div class="brand-description">Welding Electrodes & Filler Wires</div>
               </div>
 
               <div class="brand-card" data-brand-name="Metrode">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Metrode</div>
+                      <img src="assets/brands/METRODE.jpg" alt="Metrode" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Metrode</div>
                   </div>
-                  <div class="brand-name">Metrode</div>
-                  <div class="brand-description">Welding Electrodes & Filler Wires</div>
               </div>
 
               <div class="brand-card" data-brand-name="DryRod. II">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">DryRod. II</div>
+                      <img src="assets/brands/DRYROD.jpg" alt="DryRod. II" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">DryRod. II</div>
                   </div>
-                  <div class="brand-name">DryRod. II</div>
-                  <div class="brand-description">Welding Electrode Ovens</div>
               </div>
 
               <!-- Row 2 -->
               <div class="brand-card" data-brand-name="Weldcraft">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Weldcraft</div>
+                      <img src="assets/brands/WELDCRAFT.jpg" alt="Weldcraft" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Weldcraft</div>
                   </div>
-                  <div class="brand-name">Weldcraft</div>
-                  <div class="brand-description">Tig Torch & Accessories</div>
               </div>
 
               <div class="brand-card" data-brand-name="Truweld">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Truweld</div>
+                      <img src="assets/brands/TRUWELD.jpg" alt="Truweld" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Truweld</div>
                   </div>
-                  <div class="brand-name">Truweld</div>
-                  <div class="brand-description">Welding Accessories & Consumables</div>
               </div>
 
               <div class="brand-card" data-brand-name="Arcair">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Arcair</div>
+                      <img src="assets/brands/ARCAIR.jpg" alt="Arcair" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Arcair</div>
                   </div>
-                  <div class="brand-name">Arcair</div>
-                  <div class="brand-description">Gouging Torch</div>
+                  
               </div>
 
               <div class="brand-card" data-brand-name="Magnaflux">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Magnaflux</div>
+                      <img src="assets/brands/MAGNAFLUX.jpg" alt="Magnaflux" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Magnaflux</div>
                   </div>
-                  <div class="brand-name">Magnaflux</div>
-                  <div class="brand-description">Dye Penetrants & Inspection</div>
               </div>
 
               <!-- Row 3 -->
               <div class="brand-card" data-brand-name="Tempilstik">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Tempilstik</div>
+                      <img src="assets/brands/TEMPILSTIK.jpg" alt="Tempilstik" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Tempilstik</div>
                   </div>
-                  <div class="brand-name">Tempilstik</div>
-                  <div class="brand-description">Temperature Indicating Pens</div>
               </div>
 
               <div class="brand-card" data-brand-name="Tanaka">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Tanaka</div>
+                      <img src="assets/brands/TANAKA.jpg" alt="Tanaka" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Tanaka</div>
                   </div>
-                  <div class="brand-name">Tanaka</div>
-                  <div class="brand-description">Gas Cutting Equipment</div>
               </div>
 
               <div class="brand-card" data-brand-name="Chiyoda">
                   <div class="brand-logo">
-                      <div class="brand-logo-text" style="font-size: 28px; font-weight: bold;">C</div>
+                      <img src="assets/brands/CHIYODA.jpg" alt="Chiyoda" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none; font-size: 28px; font-weight: bold;">Chiyoda</div>
                   </div>
-                  <div class="brand-name">Chiyoda</div>
-                  <div class="brand-description">Gas Saving Regulator</div>
               </div>
 
               <div class="brand-card" data-brand-name="Yutaka">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Yutaka</div>
+                      <img src="assets/brands/YUTAKA.jpg" alt="Yutaka" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Yutaka</div>
                   </div>
-                  <div class="brand-name">Yutaka</div>
-                  <div class="brand-description">Welding Gun, Torch</div>
               </div>
 
               <!-- Row 4 -->
               <div class="brand-card" data-brand-name="Hard Workers">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Hard Workers</div>
+                      <img src="assets/brands/HARDWORKER.jpg" alt="Hard Workers" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Hard Workers</div>
                   </div>
-                  <div class="brand-name">Hard Workers</div>
-                  <div class="brand-description">MIG Welding Wire</div>
+              
               </div>
 
               <div class="brand-card" data-brand-name="Soyer">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Soyer</div>
+                      <img src="assets/brands/SOYER.jpg" alt="Soyer" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Soyer</div>
                   </div>
-                  <div class="brand-name">Soyer</div>
-                  <div class="brand-description">Stud Welding Machine</div>
               </div>
 
-              <div class="brand-card" data-brand-name="Aquasoll">
+              <div class="brand-card" id="aquasol" data-brand-name="Aquasol">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Aquasoll</div>
+                      <img src="assets/brands/AQUASOL.jpg" alt="Aquasol" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Aquasol</div>
                   </div>
-                  <div class="brand-name">Aquasoll</div>
-                  <div class="brand-description">Water Soluble Purge Paper & Tape</div>
+                  
               </div>
 
-              <div class="brand-card" data-brand-name="SK">
-                  <div class="brand-logo">
-                      <div class="brand-logo-text" style="font-size: 24px; font-weight: bold;">SK</div>
-                  </div>
-                  <div class="brand-name">SK</div>
-                  <div class="brand-description">Measuring Gauge</div>
-              </div>
+              
 
               <!-- Row 5 -->
-              <div class="brand-card" data-brand-name="Coppus">
+              <div class="brand-card" id="coppus" data-brand-name="Coppus">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Coppus</div>
+                      <img src="assets/brands/COPPUS.jpg" alt="Coppus" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Coppus</div>
                   </div>
-                  <div class="brand-name">Coppus</div>
-                  <div class="brand-description">Portable Ventilators</div>
               </div>
 
-              <div class="brand-card" data-brand-name="GWI Technologies">
+              <div class="brand-card" id="BW Technologies" data-brand-name="BW Technologies">
                   <div class="brand-logo">
-                      <div class="brand-logo-text" style="font-size: 20px; font-weight: bold;">GWI</div>
+                      <img src="assets/brands/BW Technologies.jpg" alt="BW Technologies" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none; font-size: 20px; font-weight: bold;">BW Technologies</div>
                   </div>
-                  <div class="brand-name">GWI Technologies</div>
-                  <div class="brand-description">Portable Gas Detector</div>
               </div>
 
-              <div class="brand-card" data-brand-name="RAC Systems">
+              <div class="brand-card" id="rac" data-brand-name="RAE Systems">
                   <div class="brand-logo">
-                      <div class="brand-logo-text" style="font-size: 20px; font-weight: bold;">RAC</div>
+                      <img src="assets/brands/RAE Systems.jpg" alt="RAE Systems" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none; font-size: 20px; font-weight: bold;">RAE Systems</div>
                   </div>
-                  <div class="brand-name">RAC Systems</div>
-                  <div class="brand-description">Portable Gas Monitors</div>
+                  
               </div>
 
-              <div class="brand-card" data-brand-name="Weldas">
+              <div class="brand-card" id="weldas" data-brand-name="Weldas">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Weldas</div>
+                      <img src="assets/brands/WELDAS.jpg" alt="Weldas" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Weldas</div>
                   </div>
-                  <div class="brand-name">Weldas</div>
-                  <div class="brand-description">Industrial Hand Protection</div>
+                 
               </div>
 
               <!-- Row 6 -->
-              <div class="brand-card" data-brand-name="Uvex">
+              <div class="brand-card" id="uvex" data-brand-name="Uvex">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Uvex</div>
+                      <img src="assets/brands/UVEX.jpg" alt="Uvex" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Uvex</div>
                   </div>
-                  <div class="brand-name">Uvex</div>
-                  <div class="brand-description">Personal Protective Equipment</div>
+
               </div>
 
-              <div class="brand-card" data-brand-name="Aces">
+              <div class="brand-card" id="aces" data-brand-name="Aces">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Aces</div>
+                      <img src="assets/brands/ACES.jpg" alt="Aces" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Aces</div>
                   </div>
-                  <div class="brand-name">Aces</div>
-                  <div class="brand-description">Personal Protection</div>
+                  
               </div>
 
-              <div class="brand-card" data-brand-name="Microgard">
+              <div class="brand-card" id="microgard" data-brand-name="Microgard">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Microgard</div>
+                      <img src="assets/brands/MICROGARD.jpg" alt="Microgard" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Microgard</div>
                   </div>
-                  <div class="brand-name">Microgard</div>
-                  <div class="brand-description">Chemical Protective Clothing</div>
+                  
               </div>
 
-              <div class="brand-card" data-brand-name="Ansell">
+              <div class="brand-card" id="ansell" data-brand-name="Ansell">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Ansell</div>
+                      <img src="assets/brands/ANSELL.jpg" alt="Ansell" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Ansell</div>
                   </div>
-                  <div class="brand-name">Ansell</div>
-                  <div class="brand-description">Industrial Protection Gloves</div>
+                  
           </div>
 
               <!-- Row 7 -->
-              <div class="brand-card" data-brand-name="Alfra">
+              <div class="brand-card" id="alfra" data-brand-name="Alfra">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Alfra</div>
+                      <img src="assets/brands/ALFRA.jpg" alt="Alfra" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Alfra</div>
                   </div>
-                  <div class="brand-name">Alfra</div>
-                  <div class="brand-description">Magnet Drilling Machine, Deburring Machine</div>
+                  
               </div>
 
-              <div class="brand-card" data-brand-name="Bosch">
+              <div class="brand-card" id="bosch" data-brand-name="Bosch">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Bosch</div>
+                      <img src="assets/brands/BOSCH.jpg" alt="Bosch" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Bosch</div>
                       </div>
-                  <div class="brand-name">Bosch</div>
-                  <div class="brand-description">High Performance Power Tools</div>
-                      </div>
+                    </div>
 
-              <div class="brand-card" data-brand-name="Makita">
+              <div class="brand-card" id="makita" data-brand-name="Makita">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Makita</div>
+                      <img src="assets/brands/MAKITA.jpg" alt="Makita" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Makita</div>
                   </div>
-                  <div class="brand-name">Makita</div>
-                  <div class="brand-description">Power Tools</div>
+                  
                   </div>
 
-              <div class="brand-card" data-brand-name="Weller">
+              <div class="brand-card" id="weiler" data-brand-name="Weiler">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Weller</div>
+                      <img src="assets/brands/WEILER.jpg" alt="Weiler" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Weiler</div>
                       </div>
-                  <div class="brand-name">Weller</div>
-                  <div class="brand-description">Industrial Wire Brushes</div>
+                  
                       </div>
 
               <!-- Row 8 -->
-              <div class="brand-card" data-brand-name="Garryson">
+              <div class="brand-card" id="garryson" data-brand-name="Garryson">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Garryson</div>
+                      <img src="assets/brands/GARRYSON.jpg" alt="Garryson" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Garryson</div>
                   </div>
-                  <div class="brand-name">Garryson</div>
-                  <div class="brand-description">Tungsten Carbide Burrs</div>
+                 
               </div>
 
-              <div class="brand-card" data-brand-name="Spillfyter">
+              <div class="brand-card" id="spilfyter" data-brand-name="Spilfyter">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Spillfyter</div>
+                      <img src="assets/brands/SPILFYTER.jpg" alt="Spilfyter" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Spilfyter</div>
                   </div>
-                  <div class="brand-name">Spillfyter</div>
-                  <div class="brand-description">Oil Absorbent Pads</div>
+                  
           </div>
 
-              <div class="brand-card" data-brand-name="Dala">
+              <div class="brand-card" id="dalo" data-brand-name="Dalo">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Dala</div>
+                      <img src="assets/brands/DALO.jpg" alt="Dalo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Dalo</div>
                   </div>
-                  <div class="brand-name">Dala</div>
-                  <div class="brand-description">Industrial Paint Marker</div>
+                
               </div>
 
-              <div class="brand-card" data-brand-name="Motolite">
+              <div class="brand-card" id="motolite" data-brand-name="Motolite">
                   <div class="brand-logo">
-                      <div class="brand-logo-text">Motolite</div>
+                      <img src="assets/brands/MOTOLITE.jpg" alt="Motolite" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">Motolite</div>
                   </div>
-                  <div class="brand-name">Motolite</div>
-                  <div class="brand-description">Car & Truck Batteries</div>
+                  
               </div>
                   </div>
+              </div>
+              <div class="see-more-container">
+                  <button class="see-more-btn" id="seeMoreBtn">See More Brands</button>
               </div>
           </div>
       </div>
@@ -1239,7 +1467,7 @@
       </script>
 
       <script>
-          // Auto-set data-brand-description attribute from .brand-description text
+          // Auto-set data-brand-description attribute and ID from brand name
           (function(){
               var brandCards = document.querySelectorAll('.brand-card');
               brandCards.forEach(function(card){
@@ -1247,8 +1475,89 @@
                   if(descElement){
                       card.setAttribute('data-brand-description', descElement.textContent.trim());
                   }
+                  // Generate ID from brand name for navigation
+                  var brandName = card.getAttribute('data-brand-name');
+                  if(brandName){
+                      var id = brandName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                      card.setAttribute('id', id);
+                  }
               });
           })();
       </script>
+
+      <script>
+          // Make each brand card clickable and add a centered hover overlay showing the brand name
+          (function(){
+              var cards = Array.from(document.querySelectorAll('.brand-card'));
+              cards.forEach(function(card){
+                  var name = card.getAttribute('data-brand-name') || (card.querySelector('.brand-name') && card.querySelector('.brand-name').textContent.trim());
+                  if(!name) return;
+
+                  // Generate ID from brand name
+                  var id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                  
+                  var href = 'brand.php?name=' + encodeURIComponent(name);
+
+                  // Create wrapper anchor and copy attributes
+                  var wrapper = document.createElement('a');
+                  wrapper.className = card.className || 'brand-card';
+                  wrapper.href = href;
+                  wrapper.id = id; // Set the ID on the wrapper
+                  Array.from(card.attributes).forEach(function(attr){ 
+                      if(attr.name !== 'id') { // Don't duplicate ID
+                          wrapper.setAttribute(attr.name, attr.value); 
+                      }
+                  });
+
+                  // Move children into wrapper
+                  while(card.firstChild){ wrapper.appendChild(card.firstChild); }
+
+                  // Create overlay element (shows on hover)
+                  var overlay = document.createElement('div');
+                  overlay.className = 'brand-overlay';
+                  overlay.textContent = name;
+                  wrapper.appendChild(overlay);
+
+                  // Replace original card with wrapper anchor
+                  card.parentNode.replaceChild(wrapper, card);
+              });
+
+              // See More functionality - Run after cards are converted
+              var seeMoreBtn = document.getElementById('seeMoreBtn');
+              var allCards = document.querySelectorAll('.brand-card');
+              var isExpanded = false;
+
+              if(seeMoreBtn && allCards.length > 20){
+                  seeMoreBtn.addEventListener('click', function(){
+                      if(!isExpanded){
+                          // Show all cards
+                          allCards.forEach(function(card){
+                              card.classList.add('visible');
+                          });
+                          seeMoreBtn.textContent = 'Show Less';
+                          isExpanded = true;
+                      } else {
+                          // Hide cards after 20
+                          allCards.forEach(function(card, index){
+                              if(index >= 20){
+                                  card.classList.remove('visible');
+                              }
+                          });
+                          seeMoreBtn.textContent = 'See More Brands';
+                          isExpanded = false;
+                          // Scroll to top of grid
+                          var brandsGrid = document.querySelector('.brands-grid');
+                          if(brandsGrid){
+                              brandsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                      }
+                  });
+              } else if(seeMoreBtn && allCards.length <= 20) {
+                  // Hide button if 20 or fewer cards
+                  seeMoreBtn.style.display = 'none';
+              }
+          })();
+      </script>
   </body>
+  </html>
   </html>

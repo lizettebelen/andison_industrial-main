@@ -405,7 +405,7 @@
         .sidebar-overlay {
             position: fixed;
             left: 0;
-            top: 0;
+            top: calc(14px + 50px + 14px + 12px + 52px);
             bottom: 0;
             width: 300px;
             max-width: 88%;
@@ -1026,7 +1026,7 @@
                           </div>
                       </li>
                       <li>
-                          <a href="contactus.php">Contact Us</a>
+                          <a href="contact.php">Contact Us</a>
                           <div class="nav-dropdown">
                               <h4>Get In Touch</h4>
                               <p>Reach out to our team for inquiries, quotes, or technical support.</p>
