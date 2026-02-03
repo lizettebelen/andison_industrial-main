@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Industrial Solutions Inc. - Homepage Redesign</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         * {
             margin: 0;
@@ -319,33 +320,59 @@
             width: 100%;
             height: 100%;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
         }
 
         .hero-slide {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 35%;
+            height: 85%;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
+            opacity: 0.3;
+            transition: all 0.6s ease;
+            transform: translateX(0) scale(0.85);
+            filter: blur(4px);
+        }
+
+        .hero-slide.prev {
+            left: 5%;
+            opacity: 0.35;
+            transform: translateX(-80px) scale(0.8);
+            filter: blur(5px);
+        }
+
+        .hero-slide.active {
+            left: 32.5%;
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            filter: blur(0);
+            z-index: 10;
+        }
+
+        .hero-slide.next {
+            right: 5%;
+            opacity: 0.35;
+            transform: translateX(80px) scale(0.8);
+            filter: blur(5px);
         }
 
         /* blurred full-bleed background taken from the slide's background-image */
         .hero-slide::before {
             content: '';
             position: absolute;
-            inset: 0;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
             background-image: inherit;
             background-size: cover;
             background-position: center;
-            filter: blur(6px) brightness(0.85);
-            transform: scale(1.06);
+            background-repeat: no-repeat;
+            filter: blur(20px) brightness(0.7) saturate(1.3);
             z-index: 0;
         }
 
@@ -354,12 +381,8 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.18);
+            background: rgba(0,0,0,0.2);
             z-index: 1;
-        }
-
-        .hero-slide.active {
-            opacity: 1;
         }
 
         /* centered clear image card on top of the blurred background */
@@ -380,21 +403,32 @@
         }
 
         .hero-thumb {
-            width: 560px;
-            max-width: 86%;
-            height: 220px;
+            width: 100%;
+            height: 100%;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            border-radius: 6px;
+            border-radius: 12px;
             box-shadow: 0 18px 40px rgba(2,6,23,0.45);
             overflow: hidden;
+            background-color: rgba(255,255,255,0.05);
         }
 
         .hero-content {
-            max-width: 800px;
+            width: 100%;
+            height: 100%;
             position: relative;
-            z-index: 10;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content h1,
+        .hero-content p,
+        .hero-content .cta-button {
+            display: none;
         }
 
         .hero-indicators {
@@ -816,22 +850,22 @@
         <button class="sidebar-close" id="closeSidebar">✕</button>
         <h3>Categories</h3>
         <ul class="sidebar-list">
-            <li><a href="#arc-handmetal-machine"><span class="sidebar-icon">🔧</span> Arc HandMetal Machine</a></li>
-            <li><a href="#arc-handmetal-robots"><span class="sidebar-icon">🤖</span> Arc HandMetal Robots</a></li>
-            <li><a href="#batteries"><span class="sidebar-icon">🔋</span> Batteries</a></li>
-            <li><a href="#drilling-lifting"><span class="sidebar-icon">🏗️</span> Drilling and Lifting</a></li>
-            <li><a href="#gas-detectors"><span class="sidebar-icon">📊</span> Portable Gas Detectors</a></li>
-            <li><a href="#ventilators"><span class="sidebar-icon">💨</span> Portable Ventilators</a></li>
-            <li><a href="#power-tools"><span class="sidebar-icon">🔩</span> Power Tools</a></li>
-            <li><a href="#protection-safety"><span class="sidebar-icon">🛡️</span> Protection and Safety</a></li>
-            <li><a href="#handmetal-accessories"><span class="sidebar-icon">⚙️</span> HandMetal Accessories</a></li>
-            <li><a href="#handmetal-consumables"><span class="sidebar-icon">📦</span> HandMetal Consumables</a></li>
+            <li><a href="#arc-handmetal-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc HandMetal Machine</a></li>
+            <li><a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc HandMetal Robots</a></li>
+            <li><a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-battery-half"></i></span> Batteries</a></li>
+            <li><a href="#drilling-lifting"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-wrench"></i></span> Drilling and Lifting</a></li>
+            <li><a href="#gas-detectors"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span> Portable Gas Detectors</a></li>
+            <li><a href="#ventilators"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span> Portable Ventilators</a></li>
+            <li><a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span> Power Tools</a></li>
+            <li><a href="#protection-safety"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span> Protection and Safety</a></li>
+            <li><a href="#handmetal-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> HandMetal Accessories</a></li>
+            <li><a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> HandMetal Consumables</a></li>
         </ul>
     </aside>
 
     <!-- Hero Section -->
     <section class="hero" id="heroSlider">
-        <div class="hero-slide active" style="background-image: url('assets/photo_2026-02-02_14-29-26.jpg');">
+        <div class="hero-slide active" style="background-image: url('assets/photo_2026-02-02_ 14-29-26.jpg');">
             <div class="hero-content">
                 <div class="hero-thumb" style="background-image: url('assets/photo_2026-02-02_14-29-26.jpg');"></div>
             </div>
@@ -887,7 +921,7 @@
                         <h3>Innovations in Sustainable Industrial Solutions</h3>
                         <p>Learn about our commitment to eco-friendly and sustainable products.</p>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </section>
@@ -996,9 +1030,18 @@
             var autoplayInterval;
 
             function showSlide(n) {
-                slides.forEach(function(slide) { slide.classList.remove('active'); });
+                slides.forEach(function(slide) { 
+                    slide.classList.remove('active', 'prev', 'next'); 
+                });
                 dots.forEach(function(dot) { dot.classList.remove('active'); });
+                
+                var prevIndex = (n - 1 + slides.length) % slides.length;
+                var nextIndex = (n + 1) % slides.length;
+                
+                slides[prevIndex].classList.add('prev');
                 slides[n].classList.add('active');
+                slides[nextIndex].classList.add('next');
+                
                 dots[n].classList.add('active');
                 currentSlide = n;
             }
@@ -1020,6 +1063,9 @@
                 });
             });
 
+            // Initialize first slide
+            showSlide(0);
+            
             // Auto-play
             autoplayInterval = setInterval(nextSlide, 5000);
         })();
