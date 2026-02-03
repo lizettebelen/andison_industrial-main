@@ -16,6 +16,7 @@
           line-height: 1.6;
           color: #333;
           background: #fff;
+          padding-top: 142px;
       }
 
           /* Header */
@@ -23,8 +24,12 @@
             background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
             color: white;
             padding: 14px 0;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-top {

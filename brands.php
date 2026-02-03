@@ -17,6 +17,7 @@
           color: #333;
           background: #fff;
           scroll-behavior: smooth;
+          padding-top: 142px;
       }
 
       html {
@@ -28,8 +29,12 @@
             background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
             color: white;
             padding: 14px 0;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             z-index: 100;
+            width: 100%;
         }
 
         .header-top {
@@ -455,7 +460,7 @@
         .sidebar-list li { border-bottom: 1px solid #f3f4f6; }
         .sidebar-list a { display:flex; gap:12px; padding:14px 6px; color:#222; text-decoration:none; align-items:center; }
         .sidebar-list a:hover { background:#fbfdff; color:#0015d1; }
-        .sidebar-icon { color:#4a21d9; width:28px; text-align:center; }
+        .sidebar-icon { color:#4a21d9; width:28px; text-align:center; font-size: 18px; }
 
         .sidebar-close { background: transparent; border: none; color:#666; font-weight:700; cursor:pointer; position:absolute; right:12px; top:12px; }
               display: inline-block;
@@ -1109,16 +1114,16 @@
           <button class="sidebar-close" id="closeSidebar">✕</button>
           <h3>Categories</h3>
           <ul class="sidebar-list">
-              <li><a href="#arc-handmetal-machine"><span class="sidebar-icon">🔧</span> Arc HandMetal Machine</a></li>
-              <li><a href="#arc-handmetal-robots"><span class="sidebar-icon">🤖</span> Arc HandMetal Robots</a></li>
-              <li><a href="#batteries"><span class="sidebar-icon">🔋</span> Batteries</a></li>
-              <li><a href="#drilling-lifting"><span class="sidebar-icon">🏗️</span> Drilling and Lifting</a></li>
-              <li><a href="#gas-detectors"><span class="sidebar-icon">📊</span> Portable Gas Detectors</a></li>
-              <li><a href="#ventilators"><span class="sidebar-icon">💨</span> Portable Ventilators</a></li>
-              <li><a href="#power-tools"><span class="sidebar-icon">🔩</span> Power Tools</a></li>
-              <li><a href="#protection-safety"><span class="sidebar-icon">🛡️</span> Protection and Safety</a></li>
-              <li><a href="#handmetal-accessories"><span class="sidebar-icon">⚙️</span> HandMetal Accessories</a></li>
-              <li><a href="#handmetal-consumables"><span class="sidebar-icon">📦</span> HandMetal Consumables</a></li>
+              <li><a href="#arc-handmetal-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc HandMetal Machine</a></li>
+              <li><a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc HandMetal Robots</a></li>
+              <li><a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-battery-half"></i></span> Batteries</a></li>
+              <li><a href="#drilling-lifting"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-wrench"></i></span> Drilling and Lifting</a></li>
+              <li><a href="#gas-detectors"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span> Portable Gas Detectors</a></li>
+              <li><a href="#ventilators"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span> Portable Ventilators</a></li>
+              <li><a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span> Power Tools</a></li>
+              <li><a href="#protection-safety"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span> Protection and Safety</a></li>
+              <li><a href="#handmetal-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> HandMetal Accessories</a></li>
+              <li><a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> HandMetal Consumables</a></li>
           </ul>
       </aside>
 
