@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - ANDISON INDUSTRIAL</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         * {
             margin: 0;
@@ -344,6 +345,43 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Dropdown animation */
+        @keyframes dropdownIn {
+            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .nav-list > li:hover .nav-dropdown { animation: dropdownIn 220ms cubic-bezier(.2,.8,.2,1); }
+
+        /* Underline reveal on dropdown links */
+        .nav-dropdown ul a { position: relative; overflow: hidden; }
+        .nav-dropdown ul a::after {
+            content: '';
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            bottom: 8px;
+            height: 3px;
+            background: #00d4aa;
+            border-radius: 4px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 260ms ease;
+            opacity: 0.95;
+        }
+        .nav-dropdown ul a:hover::after { transform: scaleX(1); }
+
+        /* Overlay and sidebar animations */
+        @keyframes overlayFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .overlay-backdrop.active { animation: overlayFadeIn 220ms ease forwards; }
+
+        .sidebar-overlay { transition: transform 320ms cubic-bezier(.2,.8,.2,1); }
+        .sidebar-overlay.active { transform: translateX(0); }
+
+        /* Browse toggle icon rotate when sidebar opens (JS toggles .open class) */
+        .browse-toggle .bi-list { transition: transform 260ms ease; }
+        .browse-toggle.open .bi-list { transform: rotate(90deg) scale(1.05); }
+
         .nav-dropdown h4 {
             color: #2b00d9;
             font-size: 14px;
@@ -629,10 +667,10 @@
                         <div class="contact-popover" role="menu" aria-hidden="true">
                             <button class="contact-close" aria-label="Close contact popover">✕</button>
                             <ul class="contact-list">
-                                <li><span class="icon">📞</span><a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a></li>
-                                <li><span class="icon">📞</span><a href="tel:<?php echo $phone2; ?>"><?php echo $phone2; ?></a></li>
-                                <li><span class="icon">📞</span><a href="tel:<?php echo $phone3; ?>"><?php echo $phone3; ?></a></li>
-                                <li><span class="icon">📧</span><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></li>
+                                <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a></li>
+                                <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone2; ?>"><?php echo $phone2; ?></a></li>
+                                <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone3; ?>"><?php echo $phone3; ?></a></li>
+                                <li><span class="icon"><i class="bi bi-envelope"></i></span><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></li>
                             </ul>
                         </div>
                     </div>
@@ -643,7 +681,7 @@
         <!-- Navigation -->
         <nav>
             <div class="nav-inner">
-                <button id="browseToggle" class="browse-toggle"><span class="hamburger">☰</span> BROWSE PRODUCTS</button>
+                <button id="browseToggle" class="browse-toggle"><span class="hamburger"><i class="bi bi-list"></i></span> BROWSE PRODUCTS</button>
                 <ul class="nav-list">
                     <li>
                         <a href="home.php">Home</a>
@@ -745,16 +783,16 @@
         <button class="sidebar-close" id="closeSidebar">✕</button>
         <h3>Categories</h3>
         <ul class="sidebar-list">
-            <li><a href="#arc-welding-machine"><span class="sidebar-icon">🔧</span> Arc Welding Machine</a></li>
-            <li><a href="#arc-welding-robots"><span class="sidebar-icon">🤖</span> Arc Welding Robots</a></li>
-            <li><a href="#batteries"><span class="sidebar-icon">🔋</span> Batteries</a></li>
-            <li><a href="#drilling-lifting"><span class="sidebar-icon">🏗️</span> Drilling and Lifting</a></li>
-            <li><a href="#gas-detectors"><span class="sidebar-icon">📊</span> Portable Gas Detectors</a></li>
-            <li><a href="#ventilators"><span class="sidebar-icon">💨</span> Portable Ventilators</a></li>
-            <li><a href="#power-tools"><span class="sidebar-icon">🔩</span> Power Tools</a></li>
-            <li><a href="#protection-safety"><span class="sidebar-icon">🛡️</span> Protection and Safety</a></li>
-            <li><a href="#welding-accessories"><span class="sidebar-icon">⚙️</span> Welding Accessories</a></li>
-            <li><a href="#welding-consumables"><span class="sidebar-icon">📦</span> Welding Consumables</a></li>
+            <li><a href="#arc-handmetal-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc HandMetal Machine</a></li>
+            <li><a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc HandMetal Robots</a></li>
+            <li><a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-battery-half"></i></span> Batteries</a></li>
+            <li><a href="#drilling-lifting"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-wrench"></i></span> Drilling and Lifting</a></li>
+            <li><a href="#gas-detectors"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span> Portable Gas Detectors</a></li>
+            <li><a href="#ventilators"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span> Portable Ventilators</a></li>
+            <li><a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span> Power Tools</a></li>
+            <li><a href="#protection-safety"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span> Protection and Safety</a></li>
+            <li><a href="#handmetal-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> HandMetal Accessories</a></li>
+            <li><a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> HandMetal Consumables</a></li>
         </ul>
     </aside>
 
@@ -892,6 +930,18 @@
                     });
                 }
             });
+        })();
+    </script>
+    <script>
+        // Ensure the browse toggle icon rotates when sidebar opens
+        (function(){
+            var bt = document.getElementById('browseToggle');
+            var sb = document.getElementById('sidebar');
+            var ov = document.getElementById('overlay');
+            var closeBtn = document.getElementById('closeSidebar');
+            if (bt) bt.addEventListener('click', function(e){ e.preventDefault(); if(sb.classList.contains('active')){ sb.classList.remove('active'); ov.classList.remove('active'); bt.classList.remove('open'); } else { sb.classList.add('active'); ov.classList.add('active'); bt.classList.add('open'); } });
+            if (ov) ov.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
+            if (closeBtn) closeBtn.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
         })();
     </script>
 </body>

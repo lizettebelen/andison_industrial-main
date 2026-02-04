@@ -687,63 +687,93 @@
 
         /* Featured Section */
         .featured-section {
-            background: linear-gradient(135deg, #e0f7f4 0%, #d0f0ec 100%);
-            padding: 50px 30px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            padding: 60px 50px;
             border-radius: 8px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 60px;
             align-items: center;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        /* Blue accent bar on left */
+        .featured-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(180deg, #0066ff 0%, #0052cc 100%);
+            border-radius: 8px 0 0 8px;
         }
 
         .featured-badge {
             display: inline-block;
             background: #00d4aa;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 3px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
         .featured-content h3 {
             font-size: 28px;
-            margin-bottom: 15px;
-            color: #333;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
         .featured-content p {
-            color: #666;
-            margin-bottom: 20px;
+            color: #b0b0b0;
+            margin-bottom: 25px;
             line-height: 1.8;
+            font-size: 15px;
         }
 
         .featured-btn {
-            background: #0015d1;
+            background: #0052cc;
             color: white;
-            padding: 12px 30px;
+            padding: 13px 32px;
             border: none;
-            border-radius: 3px;
-            font-weight: bold;
+            border-radius: 4px;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 6px 20px rgba(0, 82, 204, 0.3);
         }
 
         .featured-btn:hover {
-            background: #0011a0;
+            background: #0066ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0, 102, 255, 0.4);
         }
 
         .featured-image {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
-            border-radius: 5px;
+            height: 240px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="%23444"/></pattern></defs><rect fill="%23262626" width="1200" height="600"/><rect fill="url(%23dots)" width="1200" height="600"/></svg>');
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 60px;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            letter-spacing: -1px;
+            position: relative;
+            overflow: hidden;
         }
 
         /* Footer */
@@ -896,7 +926,7 @@
     <header>
         <div class="header-top">
             <div class="logo">
-                <div class="logo-box"><img src="assets/image-removebg-preview.png" alt="Andison Industrial" /></div>
+                <div class="logo-box"><img src="assets/HOME/image-removebg-preview.png" alt="Andison Industrial" /></div>
             </div>
 
             <div class="search-bar">
@@ -913,10 +943,10 @@
                             <div class="contact-popover" role="menu" aria-hidden="true">
                                 <button class="contact-close" aria-label="Close contact popover">✕</button>
                                 <ul class="contact-list">
-                                    <li><span class="icon">📞</span><a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a></li>
-                                    <li><span class="icon">📞</span><a href="tel:<?php echo $phone2; ?>"><?php echo $phone2; ?></a></li>
-                                    <li><span class="icon">📞</span><a href="tel:<?php echo $phone3; ?>"><?php echo $phone3; ?></a></li>
-                                    <li><span class="icon">📧</span><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone2; ?>"><?php echo $phone2; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone3; ?>"><?php echo $phone3; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-envelope"></i></span><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -927,7 +957,7 @@
         <!-- Navigation -->
         <nav>
             <div class="nav-inner">
-                <button id="browseToggle" class="browse-toggle"><span class="hamburger">☰</span> BROWSE PRODUCTS</button>
+                <button id="browseToggle" class="browse-toggle"><span class="hamburger"><i class="bi bi-list"></i></span> BROWSE PRODUCTS</button>
                 <ul class="nav-list">
                     <li>
                         <a href="home.php" class="active">Home</a>
@@ -1105,18 +1135,47 @@
         </div>
     </section>
 
-    <!-- Featured Product -->
+    <?php
+        // ========================================
+        // FEATURED EVENTS & SALES POSTING SECTION
+        // ========================================
+        // UPDATE THESE VARIABLES TO POST NEW EVENTS/SALES
+        // Change them to display latest announcements on the homepage
+        
+        $event_badge = "FEATURED"; // Options: "FEATURED", "LIMITED", "SALE", "NEW"
+        $event_title = "Your trusted Arc and Laser Welding partner";
+        $event_description = "Since introducing the AC Welding machine with built-in condenser in 1957, Panasonic has been a global leader of arc welding technology—providing high quality welding solutions from power sources to robots to software.";
+        $event_image_text = "Panasonic<br/>Welding<br/>Solutions";
+        $event_cta = "Learn More"; // Button text (leave empty to hide button)
+        
+        // EXAMPLE EVENT POSTINGS (uncomment to use):
+        // $event_title = "Limited Time Sale: 25% OFF Welding Equipment";
+        // $event_description = "Get exclusive discounts on premium welding machines and supplies. Valid until end of month. Contact us for details.";
+        // $event_image_text = "SALE<br/>25% OFF<br/>NOW";
+        // $event_cta = "Shop Sale";
+        
+        // $event_title = "Andison Industrial Expo 2026";
+        // $event_description = "Join us at the biggest industrial trade show! Meet our team, see live demonstrations, and explore new product launches.";
+        // $event_image_text = "EXPO<br/>2026<br/>REGISTER";
+        // $event_cta = "Register Now";
+    ?>
+
+    <!-- ANDISON FEATURED EVENTS & SALES SECTION -->
     <section>
         <div class="container">
             <div class="featured-section">
                 <div class="featured-content">
-                    <span class="featured-badge">FEATURED</span>
-                    <h3>New Generation Industrial Drills Launched!</h3>
-                    <p>Discover our latest advancements in drilling technology offering unparalleled precision and durability for all heavy-duty applications. Explore the future of industrial performance.</p>
-                    <button class="featured-btn">Read More</button>
+                    <?php if (!empty($event_badge)): ?>
+                        <span class="featured-badge"><?php echo $event_badge; ?></span>
+                    <?php endif; ?>
+                    <h3><?php echo $event_title; ?></h3>
+                    <p><?php echo $event_description; ?></p>
+                    <?php if (!empty($event_cta)): ?>
+                        <button class="featured-btn"><?php echo $event_cta; ?></button>
+                    <?php endif; ?>
                 </div>
                 <div class="featured-image">
-                    ▶
+                    <?php echo $event_image_text; ?>
                 </div>
             </div>
         </div>
