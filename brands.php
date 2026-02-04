@@ -15,7 +15,7 @@
       body {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           line-height: 1.6;
-          color: #333;
+          color: #2B11DB;
           background: #fff;
           scroll-behavior: smooth;
           padding-top: 142px;
@@ -27,7 +27,7 @@
 
           /* Header */
         header {
-            background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
+            background: linear-gradient(135deg, #2B11DB 0%, #2B11DB 100%);
             color: white;
             padding: 14px 0;
             position: fixed;
@@ -178,7 +178,7 @@
 
         .contact-list { list-style: none; margin: 0; padding: 6px 0; }
         .contact-list li { display:flex; gap:12px; align-items:center; padding:10px 6px; }
-        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#111; }
+        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#2B11DB; }
         .contact-list a { color: #111; text-decoration:none; font-weight:600; }
         .contact-list a:hover { text-decoration:underline; }
 
@@ -227,7 +227,7 @@
         }
 
         .inquiry-btn {
-            background: #00d894;
+            background: #00D7B3;
             color: #002b2b;
             border: none;
             padding: 10px 18px;
@@ -347,43 +347,6 @@
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
-
-        /* Dropdown animation */
-        @keyframes dropdownIn {
-            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .nav-list > li:hover .nav-dropdown { animation: dropdownIn 220ms cubic-bezier(.2,.8,.2,1); }
-
-        /* Underline reveal on dropdown links */
-        .nav-dropdown ul a { position: relative; overflow: hidden; }
-        .nav-dropdown ul a::after {
-            content: '';
-            position: absolute;
-            left: 12px;
-            right: 12px;
-            bottom: 8px;
-            height: 3px;
-            background: #00d4aa;
-            border-radius: 4px;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 260ms ease;
-            opacity: 0.95;
-        }
-        .nav-dropdown ul a:hover::after { transform: scaleX(1); }
-
-        /* Overlay and sidebar animations */
-        @keyframes overlayFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .overlay-backdrop.active { animation: overlayFadeIn 220ms ease forwards; }
-
-        .sidebar-overlay { transition: transform 320ms cubic-bezier(.2,.8,.2,1); }
-        .sidebar-overlay.active { transform: translateX(0); }
-
-        /* Browse toggle icon rotate when sidebar opens (JS toggles .open class) */
-        .browse-toggle .bi-list { transition: transform 260ms ease; }
-        .browse-toggle.open .bi-list { transform: rotate(90deg) scale(1.05); }
 
         .nav-dropdown h4 {
             color: #2b00d9;
@@ -556,8 +519,8 @@
           .page-title {
               text-align: center;
               font-size: 42px;
-              font-weight: bold;
-              color: #333;
+              font-weight: 800;
+              color: #2B11DB;
               margin-bottom: 50px;
           }
 
@@ -774,7 +737,7 @@
 
           /* Footer */
           footer {
-              background: #0015d1;
+              background: #2B11DB;
               color: white;
               padding: 30px 20px;
           }
@@ -1017,7 +980,7 @@
       <header>
           <div class="header-top">
               <div class="logo">
-                  <div class="logo-box"><img src="assets/image-removebg-preview.png" alt="Andison Industrial" /></div>
+                  <div class="logo-box"><img src="assets/HOME/image-removebg-preview.png" alt="Andison Industrial" /></div>
               </div>
 
               <div class="search-bar">
@@ -1475,18 +1438,6 @@
               document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSidebar(); });
           })();
       </script>
-    <script>
-        // Ensure the browse toggle icon rotates when sidebar opens
-        (function(){
-            var bt = document.getElementById('browseToggle');
-            var sb = document.getElementById('sidebar');
-            var ov = document.getElementById('overlay');
-            var closeBtn = document.getElementById('closeSidebar');
-            if (bt) bt.addEventListener('click', function(e){ e.preventDefault(); if(sb.classList.contains('active')){ sb.classList.remove('active'); ov.classList.remove('active'); bt.classList.remove('open'); } else { sb.classList.add('active'); ov.classList.add('active'); bt.classList.add('open'); } });
-            if (ov) ov.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
-            if (closeBtn) closeBtn.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
-        })();
-    </script>
 
       <script>
           // Manage aria states for contact dropdown (improves accessibility)

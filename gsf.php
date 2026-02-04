@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - ANDISON INDUSTRIAL</title>
+    <title>Industrial Solutions Inc. - Homepage Redesign</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         * {
             margin: 0;
@@ -15,7 +16,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: #fff;
             padding-top: 142px;
         }
 
@@ -28,8 +28,8 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            width: 100%;
         }
 
         .header-top {
@@ -72,7 +72,6 @@
             gap: 14px;
             font-size: 13px;
             flex: 0 0 auto;
-            height: 44px;
         }
 
         .contact-link {
@@ -103,7 +102,7 @@
         .contact-link:focus-visible::after {
             transform: translateX(-50%) scaleX(1);
         }
-
+        /* Contact popover */
         .contact-dropdown {
             position: relative;
             display: inline-block;
@@ -164,6 +163,7 @@
 
         .contact-close:hover { background: rgba(0,0,0,0.06); color: #333; }
 
+        /* when user explicitly closes, keep hidden until they move away */
         .contact-dropdown.closed .contact-popover {
             opacity: 0 !important;
             visibility: hidden !important;
@@ -216,6 +216,10 @@
             color: #666;
         }
 
+        .search-btn {
+            display: none;
+        }
+
         .inquiry-btn {
             background: #00d894;
             color: #002b2b;
@@ -225,12 +229,9 @@
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-            display: flex;
-            align-items: center;
         }
 
         .inquiry-btn:hover { filter: brightness(0.95); }
-        
         .right-actions {
             margin-left: auto;
             display: flex;
@@ -255,9 +256,10 @@
             min-height: 52px;
             gap: 18px;
             justify-content: flex-start;
-            padding-left: 160px;
+            padding-left: 160px; /* space for the left Browse toggle */
         }
 
+        /* Pin the browse toggle to the left side of the nav area */
         .browse-toggle {
             position: absolute;
             left: 12px;
@@ -284,13 +286,7 @@
             padding: 0;
         }
 
-        .nav-list > li {
-            position: relative;
-        }
-
-        .nav-list li {
-            position: relative;
-        }
+        .nav-list li { position: relative; }
 
         .nav-list a {
             color: white;
@@ -343,43 +339,6 @@
             visibility: visible;
             transform: translateX(-50%) translateY(0);
         }
-
-        /* Dropdown animation */
-        @keyframes dropdownIn {
-            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .nav-list > li:hover .nav-dropdown { animation: dropdownIn 220ms cubic-bezier(.2,.8,.2,1); }
-
-        /* Underline reveal on dropdown links */
-        .nav-dropdown ul a { position: relative; overflow: hidden; }
-        .nav-dropdown ul a::after {
-            content: '';
-            position: absolute;
-            left: 12px;
-            right: 12px;
-            bottom: 8px;
-            height: 3px;
-            background: #00d4aa;
-            border-radius: 4px;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 260ms ease;
-            opacity: 0.95;
-        }
-        .nav-dropdown ul a:hover::after { transform: scaleX(1); }
-
-        /* Overlay and sidebar animations */
-        @keyframes overlayFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .overlay-backdrop.active { animation: overlayFadeIn 220ms ease forwards; }
-
-        .sidebar-overlay { transition: transform 320ms cubic-bezier(.2,.8,.2,1); }
-        .sidebar-overlay.active { transform: translateX(0); }
-
-        /* Browse toggle icon rotate when sidebar opens (JS toggles .open class) */
-        .browse-toggle .bi-list { transition: transform 260ms ease; }
-        .browse-toggle.open .bi-list { transform: rotate(90deg) scale(1.05); }
 
         .nav-dropdown h4 {
             color: #2b00d9;
@@ -434,7 +393,427 @@
             margin-top: 16px !important;
         }
 
-        /* Overlay sidebar */
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23888888" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 40%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.3;
+            transition: all 0.6s ease;
+            transform: translateX(0) scale(0.85);
+            filter: blur(4px);
+        }
+
+        .hero-slide.prev {
+            left: 5%;
+            opacity: 0.35;
+            transform: translateX(-80px) scale(0.8);
+            filter: blur(5px);
+        }
+
+        .hero-slide.active {
+            left: 30%;
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            filter: blur(0);
+            z-index: 10;
+        }
+
+        .hero-slide.next {
+            right: 5%;
+            opacity: 0.35;
+            transform: translateX(80px) scale(0.8);
+            filter: blur(5px);
+        }
+
+        /* blurred full-bleed background taken from the slide's background-image */
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background-image: inherit;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(20px) brightness(0.7) saturate(1.3);
+            z-index: 0;
+        }
+
+        /* subtle dark overlay above the blur to improve text contrast */
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* centered clear image card on top of the blurred background */
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .hero-content h1,
+        .hero-content p,
+        .hero-content .cta-button {
+            display: none;
+        }
+
+        .hero-thumb {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 18px 40px rgba(2,6,23,0.45);
+            overflow: hidden;
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .hero-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content h1,
+        .hero-content p,
+        .hero-content .cta-button {
+            display: none;
+        }
+
+        .hero-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 20;
+        }
+
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hero-dot.active {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .hero-dot:hover {
+            background: rgba(255,255,255,0.7);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-button {
+            background: #00d4aa;
+            color: white;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #00b88a;
+        }
+
+        /* Section */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 15px 20px;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2b00d9;
+        }
+    
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Product Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: #f5f5f5;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #888 0%, #666 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .play-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .product-info {
+            padding: 20px;
+            background: white;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-info p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            background: linear-gradient(135deg, #e0f7f4 0%, #d0f0ec 100%);
+            padding: 50px 30px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: #00d4aa;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .featured-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .featured-content p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .featured-btn {
+            background: #0015d1;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 3px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .featured-btn:hover {
+            background: #0011a0;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 60px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0015d1;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #00d4aa;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+            }
+
+            nav li {
+                margin-right: 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .featured-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Overlay sidebar (full-height left panel) */
         .overlay-backdrop {
             position: fixed;
             inset: 0;
@@ -481,161 +860,29 @@
         .sidebar-list li { border-bottom: 1px solid #f3f4f6; }
         .sidebar-list a { display:flex; gap:12px; padding:14px 6px; color:#222; text-decoration:none; align-items:center; }
         .sidebar-list a:hover { background:#fbfdff; color:#0015d1; }
-        .sidebar-icon { color:#4a21d9; width:28px; text-align:center; font-size: 18px; }
+        .sidebar-icon { color:#4a21d9; width:28px; text-align:center; }
 
-        .sidebar-close { 
-            background: transparent; 
-            border: none; 
-            color:#666; 
-            font-weight:700; 
-            cursor:pointer; 
-            position:absolute; 
-            right:12px; 
-            top:12px;
-            font-size: 24px;
-            padding: 4px 8px;
-        }
+        .sidebar-close { background: transparent; border: none; color:#666; font-weight:700; cursor:pointer; position:absolute; right:12px; top:12px; }
 
-        /* Main Content */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .page-title {
-            text-align: center;
-            font-size: 42px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 50px;
-        }
-
-        /* Location Cards */
-        .locations-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-        }
-
-        .location-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .location-map {
-            width: 100%;
-            height: 200px;
-            border: none;
-        }
-
-        .location-info {
-            padding: 30px;
-        }
-
-        .location-name {
-            font-size: 28px;
-            font-weight: bold;
-            color: #2b00d9;
-            margin-bottom: 20px;
-        }
-
-        .info-item {
-            margin-bottom: 15px;
-        }
-
-        .info-label {
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            color: #333;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .info-value a {
-            color: #2b00d9;
-            text-decoration: none;
-        }
-
-        .info-value a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-note {
-            background: #f0f5ff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-        }
-
-        /* Footer */
-        footer {
-            background: #0015d1;
-            color: white;
-            padding: 30px 20px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-copyright {
-            font-size: 13px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 25px;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 10px;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #00d4aa;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .page-title {
-                font-size: 32px;
+            .main-wrapper {
+                grid-template-columns: 1fr;
+                padding: 0 12px;
             }
 
-            .location-name {
-                font-size: 24px;
+            .sidebar {
+                position: static;
             }
-
-            .location-info {
-                padding: 20px;
-            }
-
-            .nav-inner {
-                padding-left: 20px;
-            }
+            .nav-inner { justify-content: space-between; padding-left: 20px; }
+            .nav-list { position: static; transform: none; left: auto; margin: 8px auto 0; justify-content: center; flex-wrap: wrap; }
+            .browse-toggle { position: static; transform: none; left: auto; top: auto; padding: 6px 10px; }
         }
     </style>
 </head>
 <body>
-    <?php
+        <?php
+        // Set page title
+        $page_title = "Home";
         $company_name = "ANDISON INDUSTRIAL";
         
         // Contact information
@@ -661,19 +908,19 @@
             <div class="right-actions">
                 <button class="inquiry-btn">INQUIRY LIST</button>
                 <div class="header-contact">
-                    <div class="contact-dropdown" tabindex="0" aria-haspopup="true">
-                        <a href="#contact" class="contact-link" aria-label="Contact Us">Contact Us ▾</a>
-                        <div class="contact-popover" role="menu" aria-hidden="true">
-                            <button class="contact-close" aria-label="Close contact popover">✕</button>
-                            <ul class="contact-list">
-                                <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a></li>
-                                <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone2; ?>"><?php echo $phone2; ?></a></li>
-                                <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone3; ?>"><?php echo $phone3; ?></a></li>
-                                <li><span class="icon"><i class="bi bi-envelope"></i></span><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></li>
-                            </ul>
+                        <div class="contact-dropdown" tabindex="0" aria-haspopup="true">
+                            <a href="#contact" class="contact-link" aria-label="Contact Us">Contact Us ▾</a>
+                            <div class="contact-popover" role="menu" aria-hidden="true">
+                                <button class="contact-close" aria-label="Close contact popover">✕</button>
+                                <ul class="contact-list">
+                                    <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone2; ?>"><?php echo $phone2; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-telephone"></i></span><a href="tel:<?php echo $phone3; ?>"><?php echo $phone3; ?></a></li>
+                                    <li><span class="icon"><i class="bi bi-envelope"></i></span><a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -683,7 +930,7 @@
                 <button id="browseToggle" class="browse-toggle"><span class="hamburger"><i class="bi bi-list"></i></span> BROWSE PRODUCTS</button>
                 <ul class="nav-list">
                     <li>
-                        <a href="home.php">Home</a>
+                        <a href="home.php" class="active">Home</a>
                         <div class="nav-dropdown">
                             <h4>Welcome</h4>
                             <p>Discover our complete range of industrial welding solutions and equipment.</p>
@@ -765,7 +1012,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="contact.php" class="active">Contact Us</a>
+                        <a href="contact.php">Contact Us</a>
                         <div class="nav-dropdown">
                             <h4>Get In Touch</h4>
                             <p>Reach out to our team for inquiries, quotes, or technical support.</p>
@@ -782,95 +1029,112 @@
         <button class="sidebar-close" id="closeSidebar">✕</button>
         <h3>Categories</h3>
         <ul class="sidebar-list">
-            <li><a href="#arc-welding-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc Welding Machine</a></li>
-            <li><a href="#arc-welding-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc Welding Robots</a></li>
+            <li><a href="#arc-handmetal-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc HandMetal Machine</a></li>
+            <li><a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc HandMetal Robots</a></li>
             <li><a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-battery-half"></i></span> Batteries</a></li>
             <li><a href="#drilling-lifting"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-wrench"></i></span> Drilling and Lifting</a></li>
             <li><a href="#gas-detectors"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span> Portable Gas Detectors</a></li>
             <li><a href="#ventilators"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span> Portable Ventilators</a></li>
             <li><a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span> Power Tools</a></li>
             <li><a href="#protection-safety"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span> Protection and Safety</a></li>
-            <li><a href="#welding-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> Welding Accessories</a></li>
-            <li><a href="#welding-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> Welding Consumables</a></li>
+            <li><a href="#handmetal-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> HandMetal Accessories</a></li>
+            <li><a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> HandMetal Consumables</a></li>
         </ul>
     </aside>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1 class="page-title">Contact Us</h1>
-        
-        <div class="locations-container">
-            <!-- Manila Location -->
-            <div class="location-card">
-                <iframe 
-                    class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4385891727774!2d121.03427731483058!3d14.574729789827282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c90264a0d923%3A0x7a9b6c7e5a8b4c6d!2sManila%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph"
-                    allowfullscreen=""
-                    loading="lazy">
-                </iframe>
-                <div class="location-info">
-                    <h2 class="location-name">MANILA</h2>
-                    <div class="info-item">
-                        <div class="info-label">Address:</div>
-                        <div class="info-value">917-919 Luzon Street, Barangay 761 Zone 034 1012 Tondo ULNCR, City of Manila, First District, Philippines</div>
+    <!-- Hero Section -->
+    <section class="hero" id="heroSlider">
+        <div class="hero-slide active" style="background-image: url('assets/HOME/photo_2026-02-02_ 14-29-26.jpg');">
+            <div class="hero-content">
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26.jpg');"></div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (2).jpg');">
+            <div class="hero-content">
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (2).jpg');"></div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (3).jpg');">
+            <div class="hero-content">
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (3).jpg');"></div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (4).jpg');">
+            <div class="hero-content">
+                <div class="hero-thumb" style="background-image: url('assets/HOME/photo_2026-02-02_14-29-26 (4).jpg');"></div>
+            </div>
+        </div>
+        <div class="hero-indicators">
+            <span class="hero-dot active" data-slide="0"></span>
+            <span class="hero-dot" data-slide="1"></span>
+            <span class="hero-dot" data-slide="2"></span>
+            <span class="hero-dot" data-slide="3"></span>
+        </div>
+    </section>
+
+    <!-- Product Highlights & News -->
+    <section id="products">
+        <div class="container">
+            <h2>Product Highlights & News</h2>
+            <p class="section-description">
+                We will still keep the Youtube embeded video for product highlights. The video contents will be updated once in a while. 
+                Then same as before with News, Events, and Announcements section that can be added.
+            </p>
+
+            <div class="highlights-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <iframe src="https://www.youtube.com/embed/WhnNcK0O7Gc" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Phone:</div>
-                        <div class="info-value">
-                            <a href="tel:+63284894958">(+632) 8434-4958</a> / 
-                            <a href="tel:+63288247874">(+632) 8824-2874</a> / 
-                            <a href="tel:+63288348598">(+632) 8834-8598</a> / 
-                            <a href="tel:+63288342873">(+632) 8834-2873</a> / 
-                            <a href="tel:+63288348598">(+632) 8834-8598</a> / 
-                            <a href="tel:+63288349224">(+632) 8873-9224</a>
-                        </div>
+                    <div class="product-info">
+                        <h3>Revolutionizing Manufacturing Processes</h3>
+                        <p>Discover how our innovative technology is transforming industrial manufacturing.</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Calabarzon Location -->
-            <div class="location-card">
-                <iframe 
-                    class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.6851890468946!2d121.05897431482368!3d13.756671900993478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd052964f7d5c9%3A0x784e8a6e0c6f8f8f!2sBatangas%20City%2C%20Batangas!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph"
-                    allowfullscreen=""
-                    loading="lazy">
-                </iframe>
-                <div class="location-info">
-                    <h2 class="location-name">CALABARZON</h2>
-                    <div class="info-item">
-                        <div class="info-label">Address:</div>
-                        <div class="info-value">258-P. Zamora Street, Barangay 16, 4200 Batangas City, Batangas Philippines</div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <iframe src="https://www.youtube.com/embed/3bQ5YW167pQ" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Phone:</div>
-                        <div class="info-value">
-                            <a href="tel:+634334124126">(+6343) 425 4126</a> / 
-                            <a href="tel:+63433417233">(+6343) 723 3198</a>
-                        </div>
+                    <div class="product-info">
+                        <h3>Innovations in Sustainable Industrial Solutions</h3>
+                        <p>Learn about our commitment to eco-friendly and sustainable products.</p>
                     </div>
-                    <div class="contact-note">
-                        Do you have questions about how we can help your company? Send us an email and we'll get in touch shortly.
-                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Product -->
+    <section>
+        <div class="container">
+            <div class="featured-section">
+                <div class="featured-content">
+                    <span class="featured-badge">FEATURED</span>
+                    <h3>New Generation Industrial Drills Launched!</h3>
+                    <p>Discover our latest advancements in drilling technology offering unparalleled precision and durability for all heavy-duty applications. Explore the future of industrial performance.</p>
+                    <button class="featured-btn">Read More</button>
+                </div>
+                <div class="featured-image">
+                    ▶
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-copyright">
-                <p>&copy; 2026 <?php echo $company_name; ?>. All rights reserved.</p>
-            </div>
             <div class="footer-links">
                 <a href="#privacy">Privacy Policy</a>
                 <a href="#terms">Terms of Service</a>
                 <a href="#sitemap">Sitemap</a>
             </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 <?php echo $company_name; ?>. All rights reserved.</p>
+            </div>
         </div>
     </footer>
-
     <script>
         (function(){
             var browseToggle = document.getElementById('browseToggle');
@@ -899,8 +1163,9 @@
             if(overlay) overlay.addEventListener('click', closeSidebar);
             document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSidebar(); });
         })();
-
-        // Contact dropdown functionality
+    </script>
+    <script>
+        // Manage aria states for contact dropdown (improves accessibility)
         (function(){
             var dropdowns = document.querySelectorAll('.contact-dropdown');
             dropdowns.forEach(function(dd){
@@ -912,11 +1177,13 @@
                 dd.addEventListener('focusin', function(){ pop.setAttribute('aria-hidden','false'); dd.setAttribute('aria-expanded','true'); });
                 dd.addEventListener('focusout', function(){ setTimeout(function(){ if(!dd.contains(document.activeElement)){ pop.setAttribute('aria-hidden','true'); dd.setAttribute('aria-expanded','false'); } }, 10); });
                 dd.addEventListener('mouseenter', function(){ 
+                    // ignore hover if user explicitly closed; mouseleave will clear
                     if(dd.classList.contains('closed')) return;
                     pop.setAttribute('aria-hidden','false'); dd.setAttribute('aria-expanded','true'); 
                 });
                 dd.addEventListener('mouseleave', function(){ pop.setAttribute('aria-hidden','true'); dd.setAttribute('aria-expanded','false'); dd.classList.remove('closed'); });
 
+                // close button behavior
                 var closeBtn = dd.querySelector('.contact-close');
                 if(closeBtn){
                     closeBtn.addEventListener('click', function(e){
@@ -925,6 +1192,7 @@
                         pop.setAttribute('aria-hidden','true');
                         dd.setAttribute('aria-expanded','false');
                         dd.classList.add('closed');
+                        // blur everything in the dropdown to remove :focus-within
                         document.activeElement.blur();
                     });
                 }
@@ -932,15 +1200,53 @@
         })();
     </script>
     <script>
-        // Ensure the browse toggle icon rotates when sidebar opens
+        // Hero slider functionality
         (function(){
-            var bt = document.getElementById('browseToggle');
-            var sb = document.getElementById('sidebar');
-            var ov = document.getElementById('overlay');
-            var closeBtn = document.getElementById('closeSidebar');
-            if (bt) bt.addEventListener('click', function(e){ e.preventDefault(); if(sb.classList.contains('active')){ sb.classList.remove('active'); ov.classList.remove('active'); bt.classList.remove('open'); } else { sb.classList.add('active'); ov.classList.add('active'); bt.classList.add('open'); } });
-            if (ov) ov.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
-            if (closeBtn) closeBtn.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
+            var slider = document.getElementById('heroSlider');
+            var slides = slider.querySelectorAll('.hero-slide');
+            var dots = slider.querySelectorAll('.hero-dot');
+            var currentSlide = 0;
+            var autoplayInterval;
+
+            function showSlide(n) {
+                slides.forEach(function(slide) { 
+                    slide.classList.remove('active', 'prev', 'next'); 
+                });
+                dots.forEach(function(dot) { dot.classList.remove('active'); });
+                
+                var prevIndex = (n - 1 + slides.length) % slides.length;
+                var nextIndex = (n + 1) % slides.length;
+                
+                slides[prevIndex].classList.add('prev');
+                slides[n].classList.add('active');
+                slides[nextIndex].classList.add('next');
+                
+                dots[n].classList.add('active');
+                currentSlide = n;
+            }
+
+            function nextSlide() {
+                showSlide((currentSlide + 1) % slides.length);
+            }
+
+            function goToSlide(n) {
+                showSlide(n);
+                clearInterval(autoplayInterval);
+                autoplayInterval = setInterval(nextSlide, 5000);
+            }
+
+            // Dot click handlers
+            dots.forEach(function(dot, index) {
+                dot.addEventListener('click', function() {
+                    goToSlide(index);
+                });
+            });
+
+            // Initialize first slide
+            showSlide(0);
+            
+            // Auto-play
+            autoplayInterval = setInterval(nextSlide, 5000);
         })();
     </script>
 </body>

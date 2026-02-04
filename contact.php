@@ -22,7 +22,7 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
+            background: linear-gradient(135deg, #2B11DB 0%, #2B11DB 100%);
             color: white;
             padding: 14px 0;
             position: fixed;
@@ -173,7 +173,7 @@
 
         .contact-list { list-style: none; margin: 0; padding: 6px 0; }
         .contact-list li { display:flex; gap:12px; align-items:center; padding:10px 6px; }
-        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#111; }
+        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#2B11DB; }
         .contact-list a { color: #111; text-decoration:none; font-weight:600; }
         .contact-list a:hover { text-decoration:underline; }
 
@@ -218,7 +218,7 @@
         }
 
         .inquiry-btn {
-            background: #00d894;
+            background: #00D7B3;
             color: #002b2b;
             border: none;
             padding: 10px 18px;
@@ -345,43 +345,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Dropdown animation */
-        @keyframes dropdownIn {
-            from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .nav-list > li:hover .nav-dropdown { animation: dropdownIn 220ms cubic-bezier(.2,.8,.2,1); }
-
-        /* Underline reveal on dropdown links */
-        .nav-dropdown ul a { position: relative; overflow: hidden; }
-        .nav-dropdown ul a::after {
-            content: '';
-            position: absolute;
-            left: 12px;
-            right: 12px;
-            bottom: 8px;
-            height: 3px;
-            background: #00d4aa;
-            border-radius: 4px;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 260ms ease;
-            opacity: 0.95;
-        }
-        .nav-dropdown ul a:hover::after { transform: scaleX(1); }
-
-        /* Overlay and sidebar animations */
-        @keyframes overlayFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .overlay-backdrop.active { animation: overlayFadeIn 220ms ease forwards; }
-
-        .sidebar-overlay { transition: transform 320ms cubic-bezier(.2,.8,.2,1); }
-        .sidebar-overlay.active { transform: translateX(0); }
-
-        /* Browse toggle icon rotate when sidebar opens (JS toggles .open class) */
-        .browse-toggle .bi-list { transition: transform 260ms ease; }
-        .browse-toggle.open .bi-list { transform: rotate(90deg) scale(1.05); }
-
         .nav-dropdown h4 {
             color: #2b00d9;
             font-size: 14px;
@@ -506,9 +469,9 @@
 
         .page-title {
             text-align: center;
-            font-size: 42px;
-            font-weight: bold;
-            color: #333;
+            font-size: 35px;
+            font-weight: 800;
+            color: #2B11DB;
             margin-bottom: 50px;
         }
 
@@ -524,11 +487,15 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
         }
 
         .location-map {
             width: 100%;
-            height: 200px;
+            height: 100%;
+            min-height: 400px;
             border: none;
         }
 
@@ -579,7 +546,7 @@
 
         /* Footer */
         footer {
-            background: #0015d1;
+            background: #2B11DB;
             color: white;
             padding: 30px 20px;
             margin-top: 60px;
@@ -805,7 +772,7 @@
             <div class="location-card">
                 <iframe 
                     class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.4385891727774!2d121.03427731483058!3d14.574729789827282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c90264a0d923%3A0x7a9b6c7e5a8b4c6d!2sManila%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.8757799830987!2d120.9751084745731!3d14.606151376941842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca0674eb2fa7%3A0xc2c12bedb9ad32b!2sAndison%20Industrial%20Sales%20Incorporated!5e0!3m2!1sen!2sph!4v1770104430928!5m2!1sen!2sph" 
                     allowfullscreen=""
                     loading="lazy">
                 </iframe>
@@ -813,17 +780,20 @@
                     <h2 class="location-name">MANILA</h2>
                     <div class="info-item">
                         <div class="info-label">Address:</div>
-                        <div class="info-value">917-919 Luzon Street, Barangay 761 Zone 034 1012 Tondo ULNCR, City of Manila, First District, Philippines</div>
+                        <div class="info-value">917-919 Luzon Street, Barangay 260 Zone 024 1012 Tondo Ⅰ/Ⅱ NCR, City of Manila, First District, Philippines</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Phone:</div>
                         <div class="info-value">
-                            <a href="tel:+63284894958">(+632) 8434-4958</a> / 
-                            <a href="tel:+63288247874">(+632) 8824-2874</a> / 
-                            <a href="tel:+63288348598">(+632) 8834-8598</a> / 
-                            <a href="tel:+63288342873">(+632) 8834-2873</a> / 
-                            <a href="tel:+63288348598">(+632) 8834-8598</a> / 
-                            <a href="tel:+63288349224">(+632) 8873-9224</a>
+                            <a href="tel:+6328584958">(+632) 8584-4958</a><br>
+                            <a href="tel:+6328243287">(+632) 8243-2873</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Fax:</div>
+                        <div class="info-value">
+                            <a href="tel:+6328584958">(+632) 8584-4958</a><br>
+                            <a href="tel:+6328252922">(+632) 8252-9224</a>
                         </div>
                     </div>
                 </div>
@@ -833,7 +803,7 @@
             <div class="location-card">
                 <iframe 
                     class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3872.6851890468946!2d121.05897431482368!3d13.756671900993478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd052964f7d5c9%3A0x784e8a6e0c6f8f8f!2sBatangas%20City%2C%20Batangas!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.360155465704!2d121.05461077455868!3d13.757141397170837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd0507ab7e208b%3A0x83becc02b32349e7!2sAndison%20Industrial%20Sales%20Inc.!5e0!3m2!1sen!2sph!4v1770104315437!5m2!1sen!2sph"
                     allowfullscreen=""
                     loading="lazy">
                 </iframe>
@@ -841,15 +811,22 @@
                     <h2 class="location-name">CALABARZON</h2>
                     <div class="info-item">
                         <div class="info-label">Address:</div>
-                        <div class="info-value">258-P. Zamora Street, Barangay 16, 4200 Batangas City, Batangas Philippines</div>
+                        <div class="info-value">29B P. Zamora Street, Barangay 16, 4200 Batangas City, Batangas Philippines</div>
                     </div>
                     <div class="info-item">
                         <div class="info-label">Phone:</div>
                         <div class="info-value">
-                            <a href="tel:+634334124126">(+6343) 425 4126</a> / 
-                            <a href="tel:+63433417233">(+6343) 723 3198</a>
+                            <a href="tel:+63434254126">(+6343) 425 4126</a><br>
+
                         </div>
                     </div>
+                    <div class="info-item">
+                        <div class="info-label">Fax:</div>
+                        <div class="info-value">
+                            <a href="tel:+63437233198">(+6343) 723 3198</a>
+                        </div>
+                    </div>
+                   
                     <div class="contact-note">
                         Do you have questions about how we can help your company? Send us an email and we'll get in touch shortly.
                     </div>
@@ -930,18 +907,6 @@
                     });
                 }
             });
-        })();
-    </script>
-    <script>
-        // Ensure the browse toggle icon rotates when sidebar opens
-        (function(){
-            var bt = document.getElementById('browseToggle');
-            var sb = document.getElementById('sidebar');
-            var ov = document.getElementById('overlay');
-            var closeBtn = document.getElementById('closeSidebar');
-            if (bt) bt.addEventListener('click', function(e){ e.preventDefault(); if(sb.classList.contains('active')){ sb.classList.remove('active'); ov.classList.remove('active'); bt.classList.remove('open'); } else { sb.classList.add('active'); ov.classList.add('active'); bt.classList.add('open'); } });
-            if (ov) ov.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
-            if (closeBtn) closeBtn.addEventListener('click', function(){ sb.classList.remove('active'); ov.classList.remove('active'); if(bt) bt.classList.remove('open'); });
         })();
     </script>
 </body>

@@ -21,7 +21,7 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
+            background: linear-gradient(135deg, #2B11DB 0%, #2B11DB 100%);
             color: white;
             padding: 14px 0;
             position: fixed;
@@ -172,7 +172,7 @@
 
         .contact-list { list-style: none; margin: 0; padding: 6px 0; }
         .contact-list li { display:flex; gap:12px; align-items:center; padding:10px 6px; }
-        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#111; }
+        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#2B11DB; }
         .contact-list a { color: #111; text-decoration:none; font-weight:600; }
         .contact-list a:hover { text-decoration:underline; }
 
@@ -221,7 +221,7 @@
         }
 
         .inquiry-btn {
-            background: #00d894;
+            background: #00D7B3;
             color: #002b2b;
             border: none;
             padding: 10px 18px;
@@ -370,7 +370,7 @@
 
         .nav-dropdown ul a:hover {
             background: #f0f5ff;
-            color: #2b00d9;
+            color: #2B11DB;
         }
 
         .nav-dropdown p {
@@ -402,7 +402,7 @@
             color: white;
             text-align: center;
             padding: 60px 20px;
-            min-height: 300px;
+            min-height: 500px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -423,8 +423,8 @@
 
         .hero-slide {
             position: absolute;
-            width: 35%;
-            height: 85%;
+            width: 40%;
+            height: 90%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -442,7 +442,7 @@
         }
 
         .hero-slide.active {
-            left: 32.5%;
+            left: 30%;
             opacity: 1;
             transform: translateX(0) scale(1);
             filter: blur(0);
@@ -593,16 +593,16 @@
         }
 
         section {
-            padding: 80px 20px;
+            padding: 15px 20px;
         }
 
         section h2 {
             text-align: center;
-            font-size: 36px;
+            font-size: 45px;
             margin-bottom: 20px;
-            color: #333;
+            color: #2B11DB;
         }
-
+    
         .section-description {
             text-align: center;
             max-width: 700px;
@@ -614,7 +614,7 @@
         /* Product Highlights */
         .highlights-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
         }
@@ -633,7 +633,7 @@
 
         .product-image {
             width: 100%;
-            height: 250px;
+            height: 400px;
             background: linear-gradient(135deg, #888 0%, #666 100%);
             display: flex;
             align-items: center;
@@ -687,98 +687,69 @@
 
         /* Featured Section */
         .featured-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            padding: 60px 50px;
+            background: linear-gradient(135deg, #e0f7f4 0%, #d0f0ec 100%);
+            padding: 50px 30px;
             border-radius: 8px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 30px;
             align-items: center;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-
-        /* Blue accent bar on left */
-        .featured-section::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 6px;
-            background: linear-gradient(180deg, #0066ff 0%, #0052cc 100%);
-            border-radius: 8px 0 0 8px;
         }
 
         .featured-badge {
             display: inline-block;
             background: #00d4aa;
-            color: #000;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .featured-content h3 {
             font-size: 28px;
-            margin-bottom: 20px;
-            color: #ffffff;
-            font-weight: 700;
-            line-height: 1.3;
+            margin-bottom: 15px;
+            color: #333;
         }
 
         .featured-content p {
-            color: #b0b0b0;
-            margin-bottom: 25px;
+            color: #666;
+            margin-bottom: 20px;
             line-height: 1.8;
-            font-size: 15px;
         }
 
         .featured-btn {
-            background: #0052cc;
+            background: #0015d1;
             color: white;
-            padding: 13px 32px;
+            padding: 12px 30px;
             border: none;
-            border-radius: 4px;
-            font-weight: 700;
+            border-radius: 3px;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            box-shadow: 0 6px 20px rgba(0, 82, 204, 0.3);
+            transition: background 0.3s;
         }
 
         .featured-btn:hover {
-            background: #0066ff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(0, 102, 255, 0.4);
+            background: #2B11DB:
+;
         }
 
         .featured-image {
             width: 100%;
-            height: 240px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" patternUnits="userSpaceOnUse" width="20" height="20"><circle cx="10" cy="10" r="1" fill="%23444"/></pattern></defs><rect fill="%23262626" width="1200" height="600"/><rect fill="url(%23dots)" width="1200" height="600"/></svg>');
-            border-radius: 8px;
+            height: 200px;
+            background: linear-gradient(135deg, #0066cc 0%, #82a2c9 100%);
+            border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            padding: 30px 20px;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-            letter-spacing: -1px;
-            position: relative;
-            overflow: hidden;
+            font-size: 60px;
         }
 
         /* Footer */
         footer {
-            background: #0015d1;
+            background: #2B11DB;
             color: white;
             padding: 40px 20px;
             text-align: center;
@@ -1114,7 +1085,7 @@
             <div class="highlights-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <iframe src="https://www.youtube.com/embed/3bQ5YW167pQ" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.youtube.com/embed/WhnNcK0O7Gc" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="product-info">
                         <h3>Revolutionizing Manufacturing Processes</h3>
@@ -1135,47 +1106,18 @@
         </div>
     </section>
 
-    <?php
-        // ========================================
-        // FEATURED EVENTS & SALES POSTING SECTION
-        // ========================================
-        // UPDATE THESE VARIABLES TO POST NEW EVENTS/SALES
-        // Change them to display latest announcements on the homepage
-        
-        $event_badge = "FEATURED"; // Options: "FEATURED", "LIMITED", "SALE", "NEW"
-        $event_title = "Your trusted Arc and Laser Welding partner";
-        $event_description = "Since introducing the AC Welding machine with built-in condenser in 1957, Panasonic has been a global leader of arc welding technology—providing high quality welding solutions from power sources to robots to software.";
-        $event_image_text = "Panasonic<br/>Welding<br/>Solutions";
-        $event_cta = "Learn More"; // Button text (leave empty to hide button)
-        
-        // EXAMPLE EVENT POSTINGS (uncomment to use):
-        // $event_title = "Limited Time Sale: 25% OFF Welding Equipment";
-        // $event_description = "Get exclusive discounts on premium welding machines and supplies. Valid until end of month. Contact us for details.";
-        // $event_image_text = "SALE<br/>25% OFF<br/>NOW";
-        // $event_cta = "Shop Sale";
-        
-        // $event_title = "Andison Industrial Expo 2026";
-        // $event_description = "Join us at the biggest industrial trade show! Meet our team, see live demonstrations, and explore new product launches.";
-        // $event_image_text = "EXPO<br/>2026<br/>REGISTER";
-        // $event_cta = "Register Now";
-    ?>
-
-    <!-- ANDISON FEATURED EVENTS & SALES SECTION -->
+    <!-- Featured Product -->
     <section>
         <div class="container">
             <div class="featured-section">
                 <div class="featured-content">
-                    <?php if (!empty($event_badge)): ?>
-                        <span class="featured-badge"><?php echo $event_badge; ?></span>
-                    <?php endif; ?>
-                    <h3><?php echo $event_title; ?></h3>
-                    <p><?php echo $event_description; ?></p>
-                    <?php if (!empty($event_cta)): ?>
-                        <button class="featured-btn"><?php echo $event_cta; ?></button>
-                    <?php endif; ?>
+                    <span class="featured-badge">FEATURED</span>
+                    <h3>New Generation Industrial Drills Launched!</h3>
+                    <p>Discover our latest advancements in drilling technology offering unparalleled precision and durability for all heavy-duty applications. Explore the future of industrial performance.</p>
+                    <button class="featured-btn">Read More</button>
                 </div>
                 <div class="featured-image">
-                    <?php echo $event_image_text; ?>
+                    ▶
                 </div>
             </div>
         </div>
