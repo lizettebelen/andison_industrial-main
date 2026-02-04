@@ -305,9 +305,38 @@
 
         .nav-list a:hover { color: #00d4aa; }
 
-        .nav-list a.active {
-            border-bottom: 3px solid #00d4aa;
-            padding-bottom: 9px;
+        /* Glowing underline + dark active background for top-level nav links */
+        .nav-list > li > a {
+            position: relative;
+            padding: 10px 14px;
+            color: rgba(255,255,255,0.92);
+            transition: color 180ms ease, background 180ms ease;
+        }
+
+        .nav-list > li > a.active {
+            background: rgba(0,0,0,0.14);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 6px;
+            box-shadow: inset 0 -6px 18px rgba(0,0,0,0.06);
+        }
+
+        .nav-list > li > a.active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 6px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #00ffd1 0%, #00d4aa 50%, #2B11DB 100%);
+            box-shadow: 0 8px 28px rgba(0,212,170,0.18), 0 0 40px rgba(43,17,219,0.08);
+            pointer-events: none;
+        }
+
+        .nav-list > li > a:hover::after {
+            width: 56px;
         }
 
         .nav-dropdown {
@@ -600,6 +629,52 @@
                 padding-left: 20px;
             }
         }
+        /* Shared animations and utilities (standardized) */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes mapZoom { from { opacity:0; transform: scale(.98); filter: blur(3px);} to { opacity:1; transform: scale(1); filter: blur(0);} }
+        @keyframes slideFromRight { from { opacity:0; transform: translateX(18px);} to { opacity:1; transform: translateX(0);} }
+
+        .page-title { opacity: 1; transform: translateY(0); }
+
+        .location-card { display:grid; grid-template-columns: 1fr 1fr; gap:18px; align-items:center; }
+        .location-card .map { opacity:0; transform: scale(.98); animation: mapZoom 0s forwards; animation-delay: calc(var(--i,1) * 0ms); }
+        .location-card .info { opacity:0; transform: translateX(18px); animation: slideFromRight 0s forwards; animation-delay: calc(var(--i,1) * 0ms); }
+
+        .location-card a.tel, .location-card a.address { transition: transform .22s ease, color .18s ease; }
+        .location-card a.tel:hover { transform: translateX(6px); color:#00d4aa; }
+        .location-card a.address:hover { transform: translateX(4px); box-shadow: 0 10px 24px rgba(43,17,219,0.06); }
+
+        .contact-note { opacity: 1; transform: translateY(0); }
+
+        /* Reveal helpers (use existing fadeUp keyframes) */
+        .reveal-hidden { opacity: 0; transform: translateY(18px); transition: opacity 0s ease, transform 0s ease; }
+        .reveal { opacity: 1; transform: none; }
+        .reveal-stagger > * { opacity: 0; transform: translateY(18px); }
+        .reveal-stagger.revealed > * { opacity: 1; transform: none; transition: all .48s ease; }
+
+        h1, .page-title { opacity: 1; }
+        h1 + p, .page-subtitle { opacity: 1; }
+        img:not(.no-anim) { opacity: 1; }
+
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-hidden, img { animation: none !important; transition: none !important; }
+        }
+
+        /* Page transition keyframes */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pageExit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(20px); } }
+
+        /* Ensure header/navigation/footer do not animate or move */
+        header, nav, footer, .header-top, .nav-inner, .browse-toggle, .nav-list, .right-actions, .footer-content {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        .nav-list li { animation: none !important; opacity: 1 !important; transform: none !important; }
+
     </style>
 </head>
 <body>
@@ -907,6 +982,23 @@
                     });
                 }
             });
+        })();
+    </script>
+    <script>
+        // PAGE TRANSITION EFFECTS (match brands/home)
+        (function(){
+            document.addEventListener('click', function(e){
+                var link = e.target.closest('a[href*=".php"], a[href^="#"]');
+                if(!link) return;
+                var href = link.getAttribute('href');
+                if(!href) return;
+                if(href.startsWith('#') || href.startsWith('javascript:')) return;
+                if(!href.includes('.php')) return;
+                e.preventDefault();
+                document.body.style.animation = 'none';
+                setTimeout(function(){ window.location.href = href; }, 0);
+            });
+            window.addEventListener('load', function(){ document.body.style.animation = 'none'; });
         })();
     </script>
 </body>

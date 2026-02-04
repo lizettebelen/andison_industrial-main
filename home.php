@@ -300,9 +300,38 @@
 
         .nav-list a:hover { color: #00d4aa; }
 
-        .nav-list a.active {
-            border-bottom: 3px solid #00d4aa;
-            padding-bottom: 9px;
+        /* Glowing underline + dark active background for top-level nav links */
+        .nav-list > li > a {
+            position: relative;
+            padding: 10px 14px;
+            color: rgba(255,255,255,0.92);
+            transition: color 180ms ease, background 180ms ease;
+        }
+
+        .nav-list > li > a.active {
+            background: rgba(0,0,0,0.14);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 6px;
+            box-shadow: inset 0 -6px 18px rgba(0,0,0,0.06);
+        }
+
+        .nav-list > li > a.active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 6px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #00ffd1 0%, #00d4aa 50%, #2B11DB 100%);
+            box-shadow: 0 8px 28px rgba(0,212,170,0.18), 0 0 40px rgba(43,17,219,0.08);
+            pointer-events: none;
+        }
+
+        .nav-list > li > a:hover::after {
+            width: 56px;
         }
 
         .nav-dropdown {
@@ -316,7 +345,7 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
             z-index: 110;
             padding: 16px;
             margin-top: 8px;
@@ -429,7 +458,7 @@
             align-items: center;
             justify-content: center;
             opacity: 0.3;
-            transition: all 0.6s ease;
+            transition: all 0.1s ease;
             transform: translateX(0) scale(0.85);
             filter: blur(4px);
         }
@@ -543,7 +572,7 @@
             border-radius: 50%;
             background: rgba(255,255,255,0.5);
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.1s;
         }
 
         .hero-dot.active {
@@ -576,7 +605,7 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.1s;
             text-decoration: none;
             display: inline-block;
         }
@@ -623,7 +652,7 @@
             background: #f5f5f5;
             border-radius: 5px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.1s, box-shadow 0.1s;
         }
 
         .product-card:hover {
@@ -661,7 +690,7 @@
             color: white;
             font-size: 30px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.1s;
         }
 
         .play-btn:hover {
@@ -727,7 +756,7 @@
             border-radius: 3px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.1s;
         }
 
         .featured-btn:hover {
@@ -772,7 +801,7 @@
             color: white;
             text-decoration: none;
             font-size: 13px;
-            transition: color 0.3s;
+            transition: color 0.1s;
         }
 
         .footer-links a:hover {
@@ -821,7 +850,7 @@
             background: rgba(0,0,0,0.08);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.25s ease, visibility 0.25s;
+            transition: opacity 0.2s ease, visibility 0.2s;
             z-index: 60;
         }
 
@@ -840,7 +869,7 @@
             background: #fff;
             box-shadow: 6px 0 30px rgba(2,6,23,0.08);
             transform: translateX(-100%);
-            transition: transform 0.28s ease;
+            transition: transform 0.10s ease;
             z-index: 70;
             padding: 28px 20px;
             overflow-y: auto;
@@ -865,6 +894,289 @@
 
         .sidebar-close { background: transparent; border: none; color:#666; font-weight:700; cursor:pointer; position:absolute; right:12px; top:12px; }
 
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+
+        /* 1. HOVER EFFECTS */
+        @keyframes hoverGlow {
+            0% { box-shadow: 0 0 0px rgba(0, 212, 170, 0); }
+            100% { box-shadow: 0 0 20px rgba(0, 212, 170, 0.4); }
+        }
+
+        @keyframes hoverScale {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        @keyframes buttonBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .product-card {
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 1;
+            transform: translateY(0);
+            will-change: transform, opacity, box-shadow;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(43,17,219,0.2);
+            z-index: 1000;
+        }
+
+        .featured-btn:hover,
+        .cta-button:hover {
+            animation: buttonBounce 0.6s ease;
+        }
+
+        .nav-list a:hover {
+            animation: hoverScale 0.3s ease;
+        }
+
+        .inquiry-btn:hover {
+            animation: hoverGlow 0.4s ease forwards;
+        }
+
+        /* 2. SCROLLING ANIMATIONS */
+        /* Use shared fadeUp keyframe for consistent reveals */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .scroll-animate { opacity: 0; transform: translateY(40px); transition: opacity 0s ease, transform 0s ease; }
+        .scroll-animate.visible { }
+
+        /* Match brands.php staggered reveal timings (faster) */
+        .product-card { opacity: 1; transform: translateY(0); will-change: transform,opacity; }
+        .product-card:nth-of-type(1){ --i:1; }
+        .product-card:nth-of-type(2){ --i:2; }
+
+        section h2 { opacity: 1; }
+        .section-description { opacity: 1; }
+        .featured-section { opacity: 1; }
+
+        /* 3. PAGE TRANSITIONS */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pageExit {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        body {
+            opacity: 1;
+        }
+
+        section {
+            opacity: 1;
+        }
+
+        section:nth-of-type(1) { animation-delay: 0s; }
+        section:nth-of-type(2) { animation-delay: 0.1s; }
+        section:nth-of-type(3) { animation-delay: 0.2s; }
+        section:nth-of-type(4) { animation-delay: 0.3s; }
+
+        /* 4. SELF-DRAWING ANIMATIONS */
+        @keyframes drawBorder {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 212, 170, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(0, 212, 170, 0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .featured-badge {
+            animation: pulseGlow 2s infinite;
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        /* 5. TEXT ANIMATIONS */
+        @keyframes typeWriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blinkCursor {
+            0%, 49% {
+                border-right-color: transparent;
+            }
+            50%, 100% {
+                border-right-color: #00d4aa;
+            }
+        }
+
+        @keyframes textGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes textFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            animation: textFadeIn 0.8s ease;
+        }
+
+        .hero p {
+            animation: textFadeIn 0.8s ease 0.2s both;
+        }
+
+        .product-info h3,
+        .featured-content h3 {
+            animation: textFadeIn 0.6s ease;
+            position: relative;
+        }
+
+        .product-info h3::after,
+        .featured-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #2B11DB, #00d4aa, transparent);
+
+            border-radius: 2px;
+        }
+
+        .footer-links a {
+            position: relative;
+            animation: textFadeIn 0.6s ease;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00d4aa;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Stagger text animations */
+        .nav-list li { opacity: 1; }
+
+        .nav-list li:nth-child(1) { animation-delay: 0.1s; }
+        .nav-list li:nth-child(2) { animation-delay: 0.2s; }
+        .nav-list li:nth-child(3) { animation-delay: 0.3s; }
+        .nav-list li:nth-child(4) { animation-delay: 0.4s; }
+        .nav-list li:nth-child(5) { animation-delay: 0.5s; }
+        .nav-list li:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Smooth transitions for all interactive elements */
+        a, button, input, [role="button"] {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
         @media (max-width: 768px) {
             .main-wrapper {
                 grid-template-columns: 1fr;
@@ -878,6 +1190,33 @@
             .nav-list { position: static; transform: none; left: auto; margin: 8px auto 0; justify-content: center; flex-wrap: wrap; }
             .browse-toggle { position: static; transform: none; left: auto; top: auto; padding: 6px 10px; }
         }
+
+        /* Global animation utilities (shared) */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        .reveal-hidden { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal { opacity: 1; transform: none; }
+        .reveal-stagger > * { opacity: 0; transform: translateY(18px); }
+        .reveal-stagger.revealed > * { opacity: 1; transform: none; transition: all .48s ease; }
+
+        h1, .page-title { opacity: 1; }
+        h1 + p, .page-subtitle { opacity: 1; }
+        img:not(.no-anim) { opacity: 1; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-hidden, img { animation: none !important; transition: none !important; }
+        }
+        /* Ensure header/navigation/footer do not animate or move */
+        header, nav, footer, .header-top, .nav-inner, .browse-toggle, .nav-list, .right-actions, .footer-content {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        /* Prevent individual nav items from receiving reveal animations */
+        .nav-list li { animation: none !important; opacity: 1 !important; transform: none !important; }
     </style>
 </head>
 <body>
@@ -1248,6 +1587,169 @@
             
             // Auto-play
             autoplayInterval = setInterval(nextSlide, 5000);
+        })();
+    </script>
+
+    <script>
+        // ============================================
+        // SCROLL ANIMATIONS - Trigger animations when elements come into view
+        // ============================================
+        (function(){
+            var observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            var observer = new IntersectionObserver(function(entries){
+                entries.forEach(function(entry){
+                    if(entry.isIntersecting){
+                        entry.target.classList.add('visible');
+                        // Optional: stop observing once animated
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with scroll-animate class
+            var animatedElements = document.querySelectorAll('.scroll-animate, .product-card, section h2, .section-description, .featured-section');
+            animatedElements.forEach(function(el){
+                observer.observe(el);
+            });
+
+            // Stagger animations for product cards on page load
+            setTimeout(function(){
+                var cards = document.querySelectorAll('.product-card');
+                cards.forEach(function(card, index){
+                    setTimeout(function(){
+                        card.style.opacity = '1';
+                    }, index * 150);
+                });
+            }, 300);
+        })();
+    </script>
+
+    <script>
+        // ============================================
+        // PAGE TRANSITION EFFECTS
+        // ============================================
+        (function(){
+            // Smooth page transitions on link clicks
+            document.addEventListener('click', function(e){
+                var link = e.target.closest('a[href*=".php"], a[href^="#"]');
+                if(!link) return;
+                
+                var href = link.getAttribute('href');
+                
+                // Skip if it's an anchor link or javascript link
+                if(href.startsWith('#') || href.startsWith('javascript:')) return;
+                
+                // Check if it's an internal PHP file
+                if(!href.includes('.php')) return;
+                
+                // Prevent default and add exit animation
+                e.preventDefault();
+                
+                var body = document.body;
+                body.style.animation = 'none';
+
+                setTimeout(function(){
+                    window.location.href = href;
+                }, 0);
+            });
+
+            // Add page entry animation on load
+            window.addEventListener('load', function(){
+                document.body.style.animation = 'none';
+            });
+        })();
+    </script>
+
+    <script>
+        // ============================================
+        // TEXT ANIMATIONS - Enhanced text reveal effects
+        // ============================================
+        (function(){
+            // Add text animation to headings and descriptions
+            var headings = document.querySelectorAll('h2, h3');
+            headings.forEach(function(heading, index){
+                heading.style.animationDelay = (index * 0.1) + 's';
+            });
+
+            // Animate footer links on hover
+            var footerLinks = document.querySelectorAll('.footer-links a');
+            footerLinks.forEach(function(link, index){
+                link.style.animationDelay = (index * 0.1) + 's';
+            });
+
+            // Stagger contact list items
+            var contactItems = document.querySelectorAll('.contact-list li');
+            contactItems.forEach(function(item, index){
+                item.style.opacity = '0';
+                item.style.animation = 'fadeInUp 0.5s ease ' + (index * 0.1) + 's forwards';
+            });
+        })();
+    </script>
+
+    <script>
+        // ============================================
+        // HOVER EFFECTS - Enhanced interactive feedback
+        // ============================================
+        (function(){
+            // Add hover effects to product cards
+            var cards = document.querySelectorAll('.product-card');
+            cards.forEach(function(card){
+                card.addEventListener('mouseenter', function(){
+                    this.style.boxShadow = '0 20px 40px rgba(0, 212, 170, 0.2)';
+                });
+                card.addEventListener('mouseleave', function(){
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // Enhance button interactions
+            var buttons = document.querySelectorAll('button, .cta-button, .featured-btn');
+            buttons.forEach(function(btn){
+                btn.addEventListener('mousedown', function(){
+                    this.style.transform = 'scale(0.98)';
+                });
+                btn.addEventListener('mouseup', function(){
+                    this.style.transform = '';
+                });
+                btn.addEventListener('mouseleave', function(){
+                    this.style.transform = '';
+                });
+            });
+
+            // Enhance navigation link hover effects
+            var navLinks = document.querySelectorAll('.nav-list a');
+            navLinks.forEach(function(link){
+                link.addEventListener('mouseenter', function(){
+                    this.style.color = '#00d4aa';
+                });
+                link.addEventListener('mouseleave', function(){
+                    if(!this.classList.contains('active')){
+                        this.style.color = '';
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        // ============================================
+        // PARALLAX & SCROLL EFFECTS
+        // ============================================
+        (function(){
+            var heroSlider = document.getElementById('heroSlider');
+            if(!heroSlider) return;
+
+            window.addEventListener('scroll', function(){
+                var scrolled = window.pageYOffset;
+                if(scrolled < 500){
+                    heroSlider.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+                    heroSlider.style.opacity = 1 - (scrolled / 800);
+                }
+            }, false);
         })();
     </script>
 </body>

@@ -299,9 +299,38 @@
 
         .nav-list a:hover { color: #00d4aa; }
 
-        .nav-list a.active {
-            border-bottom: 3px solid #00d4aa;
-            padding-bottom: 9px;
+        /* Glowing underline + dark active background for top-level nav links */
+        .nav-list > li > a {
+            position: relative;
+            padding: 10px 14px;
+            color: rgba(255,255,255,0.92);
+            transition: color 180ms ease, background 180ms ease;
+        }
+
+        .nav-list > li > a.active {
+            background: rgba(0,0,0,0.14);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 6px;
+            box-shadow: inset 0 -6px 18px rgba(0,0,0,0.06);
+        }
+
+        .nav-list > li > a.active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 6px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #00ffd1 0%, #00d4aa 50%, #2B11DB 100%);
+            box-shadow: 0 8px 28px rgba(0,212,170,0.18), 0 0 40px rgba(43,17,219,0.08);
+            pointer-events: none;
+        }
+
+        .nav-list > li > a:hover::after {
+            width: 56px;
         }
 
         .nav-dropdown {
@@ -450,12 +479,53 @@
             padding: 60px 20px;
         }
 
+        /* Shared Animation Keyframes */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .reveal-hidden { opacity: 0; transform: translateY(18px); transition: opacity 0s ease, transform 0s ease; }
+        .reveal { opacity: 1; transform: none; animation: fadeUp 0s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; animation-delay: calc(var(--i, 0) * 0ms); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .float, .pulse {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
         .page-title {
             font-size: 42px;
             font-weight: 800;
             color: #2B11DB;
             margin-bottom: 30px;
             text-align: center;
+            animation: fadeUp 0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .page-subtitle {
@@ -666,15 +736,16 @@
             .nav-list { position: static; transform: none; left: auto; margin: 8px auto 0; justify-content: center; flex-wrap: wrap; gap: 15px; }
             .browse-toggle { position: static; transform: none; left: auto; top: auto; padding: 6px 10px; }
             
-            .page-title {
-                font-size: 32px;
+            .page-subtitle {
+                font-size: 18px;
+                color: #666;
+                text-align: center;
+                margin-bottom: 60px;
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+                animation: fadeUp 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
             }
-
-            .section-title {
-                font-size: 22px;
-            }
-
-            .values-section {
                 padding: 30px 20px;
             }
 
@@ -683,6 +754,92 @@
                 text-align: center;
             }
         }
+
+        /* Shared animations and utilities */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes pulse { 0%{ transform: scale(1); }50%{ transform: scale(1.03);}100%{ transform: scale(1);} }
+
+        .reveal-hidden { opacity: 0; transform: translateY(18px); }
+        .reveal { animation: fadeUp 0s cubic-bezier(.2,.9,.2,1) both; animation-delay: calc(var(--i,0) * 0ms); }
+
+        @media (prefers-reduced-motion: reduce) { .reveal, .float, .pulse { animation: none !important; transition: none !important; } }
+
+        /* Page-specific animations - match brands animation style */
+        .feature-card {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity, box-shadow;
+        }
+        .feature-card:nth-of-type(1){ --i:1; }
+        .feature-card:nth-of-type(2){ --i:2; }
+        .feature-card:nth-of-type(3){ --i:3; }
+        .feature-card:nth-of-type(4){ --i:4; }
+        .feature-card:hover { transform: translateY(-12px) scale(1.03); box-shadow: 0 25px 50px rgba(43,17,219,0.18); border-left-color:#00d4aa; z-index:1000; }
+        .feature-icon { animation: float 3.6s ease-in-out infinite; }
+
+        .values-section .value-item {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity, box-shadow;
+        }
+        .values-section .value-item:nth-of-type(1){ --i:1; }
+        .values-section .value-item:nth-of-type(2){ --i:2; }
+        .values-section .value-item:nth-of-type(3){ --i:3; }
+        .values-section .value-item:hover { transform: translateY(-12px) scale(1.03); box-shadow: 0 25px 50px rgba(43,17,219,0.12); }
+
+        .team-member {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all .35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform, opacity, box-shadow;
+        }
+        .team-member:nth-of-type(1){ --i:1; }
+        .team-member:nth-of-type(2){ --i:2; }
+        .team-member:nth-of-type(3){ --i:3; }
+        .team-member:hover { transform: translateY(-12px) scale(1.03); box-shadow: 0 25px 50px rgba(43,17,219,0.14); }
+
+        .footer-links a { transition: transform .22s ease, color .2s ease; }
+        .footer-links a:hover { transform: translateY(-4px); color: #00d4aa; }
+
+        /* Reveal helpers (use existing fadeUp keyframes) */
+        .reveal-hidden { opacity: 0; transform: translateY(18px); transition: opacity 0s ease, transform 0s ease; }
+        .reveal { opacity: 1; transform: none; }
+        .reveal-stagger > * { opacity: 0; transform: translateY(18px); }
+        .reveal-stagger.revealed > * { opacity: 1; transform: none; transition: all .48s ease; }
+
+        h1, .page-title { opacity: 1; }
+        h1 + p, .page-subtitle { opacity: 1; }
+        img:not(.no-anim) { opacity: 1; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-hidden, img { animation: none !important; transition: none !important; }
+        }
+
+        /* Ensure header/navigation/footer do not animate or move */
+        header, nav, footer, .header-top, .nav-inner, .browse-toggle, .nav-list, .right-actions, .footer-content {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        /* Prevent individual nav items from receiving reveal animations */
+        .nav-list li { animation: none !important; opacity: 1 !important; transform: none !important; }
+
+        /* Page transition keyframes (match home/brands) */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pageExit {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(20px); }
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
@@ -927,6 +1084,34 @@
             if(closeBtn) closeBtn.addEventListener('click', closeSidebar);
             if(overlay) overlay.addEventListener('click', closeSidebar);
             document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSidebar(); });
+        })();
+    </script>
+
+    <script>
+        // ============================================
+        // PAGE TRANSITION EFFECTS (match home/brands)
+        // ============================================
+        (function(){
+            document.addEventListener('click', function(e){
+                var link = e.target.closest('a[href*=".php"], a[href^="#"]');
+                if(!link) return;
+
+                var href = link.getAttribute('href');
+                if(!href) return;
+
+                // Skip anchor-only and javascript links
+                if(href.startsWith('#') || href.startsWith('javascript:')) return;
+                if(!href.includes('.php')) return;
+
+                e.preventDefault();
+                document.body.style.animation = 'none';
+
+                setTimeout(function(){ window.location.href = href; }, 0);
+            });
+
+            window.addEventListener('load', function(){
+                document.body.style.animation = 'pageEnter 0.18s ease';
+            });
         })();
     </script>
 

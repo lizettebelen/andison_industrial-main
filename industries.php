@@ -298,9 +298,56 @@
             position: relative;
         }
 
+        /* Glowing underline + dark active background for top-level nav links */
+        .nav-list > li > a {
+            position: relative;
+            padding: 10px 14px;
+            color: rgba(255,255,255,0.92);
+            transition: color 180ms ease, background 180ms ease;
+        }
+
+        .nav-list > li > a.active {
+            background: rgba(0,0,0,0.14);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 6px;
+            box-shadow: inset 0 -6px 18px rgba(0,0,0,0.06);
+        }
+
+        .nav-list > li > a.active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 6px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #00ffd1 0%, #00d4aa 50%, #2B11DB 100%);
+            box-shadow: 0 8px 28px rgba(0,212,170,0.18), 0 0 40px rgba(43,17,219,0.08);
+            pointer-events: none;
+        }
+
+        .nav-list > li > a:hover::after {
+            width: 56px;
+        }
+
         .nav-list a:hover { color: #00d4aa; }
 
-       
+        /* Reveal helpers (use existing fadeUp keyframes) */
+        .reveal-hidden { opacity: 0; transform: translateY(18px); transition: opacity 0s ease, transform 0s ease; }
+        .reveal { opacity: 1; transform: none; }
+        .reveal-stagger > * { opacity: 0; transform: translateY(18px); }
+        .reveal-stagger.revealed > * { opacity: 1; transform: none; transition: all .48s ease; }
+
+        h1, .page-title { opacity: 1; }
+        h1 + p, .page-subtitle { opacity: 1; }
+        img:not(.no-anim) { opacity: 1; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-hidden, img { animation: none !important; transition: none !important; }
+        }
+
 
         .nav-dropdown {
             position: absolute;
@@ -313,7 +360,6 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
             z-index: 110;
             padding: 16px;
             margin-top: 8px;
@@ -362,7 +408,6 @@
             padding: 8px 12px;
             display: block;
             border-radius: 4px;
-            transition: background 0.2s ease, color 0.2s ease;
             border-bottom: none;
         }
 
@@ -392,6 +437,10 @@
             margin-top: 16px !important;
         }
 
+        /* Shared Animation Keyframes (standardized) - DISABLED */
+
+        /* Page transition keyframes - DISABLED */
+
         /* Overlay sidebar */
         .overlay-backdrop {
             position: fixed;
@@ -399,7 +448,6 @@
             background: rgba(0,0,0,0.08);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.25s ease, visibility 0.25s;
             z-index: 60;
         }
 
@@ -418,7 +466,6 @@
             background: #fff;
             box-shadow: 6px 0 30px rgba(2,6,23,0.08);
             transform: translateX(-100%);
-            transition: transform 0.28s ease;
             z-index: 70;
             padding: 28px 20px;
             overflow-y: auto;
@@ -489,10 +536,22 @@
             background: #f8f9fa;
             border-radius: 12px;
             border: 1px solid #e9ecef;
+            opacity: 1;
+            transform: translateY(0);
+            transition: box-shadow 0.3s, transform 0.3s;
+            will-change: transform, opacity, box-shadow;
+        }
+        .industry-card:nth-of-type(1){ --i:1; }
+        .industry-card:nth-of-type(2){ --i:2; }
+        .industry-card:nth-of-type(3){ --i:3; }
+
+        .industry-card:hover {
+            box-shadow: 0 25px 50px rgba(43, 17, 219, 0.12);
+            transform: translateY(-12px) scale(1.03);
+            z-index: 1000;
         }
 
         .industry-card.reverse {
-            grid-template-columns: 1fr 1fr;
             direction: rtl;
         }
 
@@ -659,9 +718,33 @@
             transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            color: #00d4aa;
+        
+        /* Shared animations and utilities */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes contentSlide { from { opacity:0; transform: translateX(-28px);} to { opacity:1; transform: translateX(0);} }
+        @keyframes imageSlide { from { opacity:0; transform: translateX(18px) scale(1.04);} to { opacity:1; transform: translateX(0) scale(1);} }
+
+        .industry-card { opacity:1; transform: translateY(0); }
+        .industry-card:nth-child(1){ animation-delay: 0ms; } .industry-card:nth-child(2){ animation-delay:0ms; }
+        .industry-card .industry-content { opacity: 1; transform: translateX(0); }
+        .industry-card .industry-image { opacity: 1; transform: translateX(0); }
+
+        .read-more-btn .arrow { transition: transform .32s ease; }
+        .read-more-btn[aria-expanded="true"] .arrow { transform: rotate(90deg); }
+
+        .industry-image img { opacity: 1; transform: scale(1); }
+
+        /* Ensure header/navigation/footer do not animate or move */
+        header, nav, footer, .header-top, .nav-inner, .browse-toggle, .nav-list, .right-actions, .footer-content {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+            opacity: 1 !important;
         }
+
+        /* Prevent individual nav items from receiving reveal animations */
+        .nav-list li { animation: none !important; opacity: 1 !important; transform: none !important; }
+
     </style>
 </head>
 <body>
@@ -1065,5 +1148,5 @@
             });
         });
     </script>
-</body>
+    </body>
 </html>

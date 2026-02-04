@@ -739,32 +739,32 @@
           footer {
               background: #2B11DB;
               color: white;
-              padding: 30px 20px;
+              padding: 40px 40px;
+              text-align: center;
+              margin-top: 60px;
           }
 
           .footer-content {
-              max-width: 1400px;
+              max-width: 1200px;
               margin: 0 auto;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              flex-wrap: wrap;
-              gap: 20px;
           }
 
           .footer-copyright {
-              font-size: 13px;
+              font-size: 14px;
+              margin-bottom: 15px;
           }
 
           .footer-links {
               display: flex;
               gap: 25px;
+              justify-content: center;
+              flex-wrap: wrap;
           }
 
           .footer-links a {
               color: white;
               text-decoration: none;
-              font-size: 10px;
+              font-size: 13px;
               transition: color 0.3s;
           }
 
@@ -1051,9 +1051,9 @@
                                   <li><a href="brands.php#weldcraft">Hard Workers</a></li>
                                   <li><a href="brands.php#weldcraft">Soyer</a></li>
                                   <li><a href="brands.php#weldcraft">Aquasol</a></li>
-                                  <li><a href="brands.php#weldcraft">SK</a></li>
+                                  <li><a href="brands.php#weldcraft">SK And GAL GAGE</a></li>
                                   <li><a href="brands.php#weldcraft">Coppus</a></li>
-                                  <li><a href="brands.php#weldcraft">GWI</a></li>
+                                  <li><a href="brands.php#weldcraft">BW Technologies</a></li>
                                   <li><a href="brands.php#weldcraft">RAC</a></li>
                                   <li><a href="brands.php#weldcraft">Weldas</a></li>
                                   <li><a href="brands.php#weldcraft">Uvex</a></li>
@@ -1195,7 +1195,7 @@
                   
               </div>
 
-              <div class="brand-card" data-brand-name="Magnaflux">
+              <div class="brand-card" data-brand-name="MAGNAFLUX">
                   <div class="brand-logo">
                       <img src="assets/brands/MAGNAFLUX.jpg" alt="Magnaflux" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Magnaflux</div>
@@ -1210,14 +1210,14 @@
                   </div>
               </div>
 
-              <div class="brand-card" data-brand-name="Tanaka">
+              <div class="brand-card" data-brand-name="TANAKA">
                   <div class="brand-logo">
                       <img src="assets/brands/TANAKA.jpg" alt="Tanaka" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Tanaka</div>
                   </div>
               </div>
 
-              <div class="brand-card" data-brand-name="Chiyoda">
+              <div class="brand-card" data-brand-name="CHIYODA">
                   <div class="brand-logo">
                       <img src="assets/brands/CHIYODA.jpg" alt="Chiyoda" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none; font-size: 28px; font-weight: bold;">Chiyoda</div>
@@ -1232,7 +1232,7 @@
               </div>
 
               <!-- Row 4 -->
-              <div class="brand-card" data-brand-name="Hard Workers">
+              <div class="brand-card" data-brand-name="HARDWORKER">
                   <div class="brand-logo">
                       <img src="assets/brands/HARDWORKER.jpg" alt="Hard Workers" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Hard Workers</div>
@@ -1252,13 +1252,19 @@
                       <img src="assets/brands/AQUASOL.jpg" alt="Aquasol" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Aquasol</div>
                   </div>
-                  
+              </div>
+
+              <div class="brand-card" id="sk-and-gal-gage" data-brand-name="SK And GAL GAGE">
+                  <div class="brand-logo">
+                      <img src="assets/brands/SK AND GAL GAGE.jpg" alt="SK And GAL GAGE" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                      <div class="brand-logo-text" style="display:none;">SK And GAL GAGE</div>
+                  </div>
               </div>
 
               
 
               <!-- Row 5 -->
-              <div class="brand-card" id="coppus" data-brand-name="Coppus">
+              <div class="brand-card" id="coppus" data-brand-name="COPPUS">
                   <div class="brand-logo">
                       <img src="assets/brands/COPPUS.jpg" alt="Coppus" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Coppus</div>
@@ -1280,7 +1286,7 @@
                   
               </div>
 
-              <div class="brand-card" id="weldas" data-brand-name="Weldas">
+              <div class="brand-card" id="weldas" data-brand-name="WELDAS">
                   <div class="brand-logo">
                       <img src="assets/brands/WELDAS.jpg" alt="Weldas" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Weldas</div>
@@ -1289,7 +1295,7 @@
               </div>
 
               <!-- Row 6 -->
-              <div class="brand-card" id="uvex" data-brand-name="Uvex">
+              <div class="brand-card" id="uvex" data-brand-name="UVEX">
                   <div class="brand-logo">
                       <img src="assets/brands/UVEX.jpg" alt="Uvex" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Uvex</div>
@@ -1297,7 +1303,7 @@
 
               </div>
 
-              <div class="brand-card" id="aces" data-brand-name="Aces">
+              <div class="brand-card" id="aces" data-brand-name="ACES">
                   <div class="brand-logo">
                       <img src="assets/brands/ACES.jpg" alt="Aces" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Aces</div>
@@ -1305,7 +1311,7 @@
                   
               </div>
 
-              <div class="brand-card" id="microgard" data-brand-name="Microgard">
+              <div class="brand-card" id="microgard" data-brand-name="MICROGARD">
                   <div class="brand-logo">
                       <img src="assets/brands/MICROGARD.jpg" alt="Microgard" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Microgard</div>
@@ -1313,7 +1319,7 @@
                   
               </div>
 
-              <div class="brand-card" id="ansell" data-brand-name="Ansell">
+              <div class="brand-card" id="ansell" data-brand-name="ANSELL">
                   <div class="brand-logo">
                       <img src="assets/brands/ANSELL.jpg" alt="Ansell" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Ansell</div>
@@ -1378,7 +1384,7 @@
                 
               </div>
 
-              <div class="brand-card" id="motolite" data-brand-name="Motolite">
+              <div class="brand-card" id="motolite" data-brand-name="MOTOLITE">
                   <div class="brand-logo">
                       <img src="assets/brands/MOTOLITE.jpg" alt="Motolite" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                       <div class="brand-logo-text" style="display:none;">Motolite</div>

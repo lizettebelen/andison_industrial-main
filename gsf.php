@@ -21,7 +21,7 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #2b00d9 0%, #2b00b0 100%);
+            background: linear-gradient(135deg, #2B11DB 0%, #2B11DB 100%);
             color: white;
             padding: 14px 0;
             position: fixed;
@@ -172,7 +172,7 @@
 
         .contact-list { list-style: none; margin: 0; padding: 6px 0; }
         .contact-list li { display:flex; gap:12px; align-items:center; padding:10px 6px; }
-        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#111; }
+        .contact-list .icon { font-size:18px; width:28px; text-align:center; color:#2B11DB; }
         .contact-list a { color: #111; text-decoration:none; font-weight:600; }
         .contact-list a:hover { text-decoration:underline; }
 
@@ -221,7 +221,7 @@
         }
 
         .inquiry-btn {
-            background: #00d894;
+            background: #00D7B3;
             color: #002b2b;
             border: none;
             padding: 10px 18px;
@@ -370,7 +370,7 @@
 
         .nav-dropdown ul a:hover {
             background: #f0f5ff;
-            color: #2b00d9;
+            color: #2B11DB;
         }
 
         .nav-dropdown p {
@@ -598,9 +598,9 @@
 
         section h2 {
             text-align: center;
-            font-size: 36px;
+            font-size: 45px;
             margin-bottom: 20px;
-            color: #2b00d9;
+            color: #2B11DB;
         }
     
         .section-description {
@@ -687,13 +687,14 @@
 
         /* Featured Section */
         .featured-section {
-            background: linear-gradient(135deg, #e0f7f4 0%, #d0f0ec 100%);
+            background: linear-gradient(135deg, #00ccff 10%, #d0f0ec 100%);
             padding: 50px 30px;
             border-radius: 8px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             align-items: center;
+            margin-bottom: 70px;
         }
 
         .featured-badge {
@@ -731,13 +732,14 @@
         }
 
         .featured-btn:hover {
-            background: #0011a0;
+            background: #2B11DB:
+;
         }
 
         .featured-image {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            height: 300px;
+            background: linear-gradient(135deg, #66ffff 0%, #336699 100%);
             border-radius: 5px;
             display: flex;
             align-items: center;
@@ -748,7 +750,7 @@
 
         /* Footer */
         footer {
-            background: #0015d1;
+            background: #2B11DB;
             color: white;
             padding: 40px 20px;
             text-align: center;
@@ -1116,7 +1118,7 @@
                     <button class="featured-btn">Read More</button>
                 </div>
                 <div class="featured-image">
-                    ▶
+                    <img src="assets/HOME/photo_2026-02-03_10-30-47 (2).jpg" alt="Industrial Drills" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
                 </div>
             </div>
         </div>
