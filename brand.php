@@ -69,8 +69,8 @@
         }
 
         .back-button {
-            background: rgba(255,255,255,0.1);
-            color: white;
+            background: #00D7B3;
+            color: #2E2E2E;
             border: 2px solid rgba(255,255,255,0.3);
             padding: 8px 20px;
             border-radius: 5px;
@@ -164,12 +164,14 @@
             gap: 25px;
             margin-top: 30px;
             justify-content: center;
+            align-items: stretch;
         }
 
         .product-card {
             flex: 0 1 calc(20% - 20px);
             min-width: 240px;
             max-width: 280px;
+            height: auto;
         }
 
         @media (min-width: 1500px) {
@@ -186,6 +188,9 @@
             text-align: center;
             transition: all 0.3s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .product-card:hover {
@@ -197,7 +202,7 @@
         .product-image {
             width: 100%;
             height: 220px;
-            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            background: #ffffff;
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -218,6 +223,7 @@
             color: #666;
             font-size: 14px;
             line-height: 1.5;
+            flex-grow: 1;
         }
 
         .product-badge {
@@ -229,6 +235,41 @@
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 10px;
+        }
+
+        .add-to-inquiry {
+            background: #00D7B3;
+            color: #2E2E2E;
+            padding: 10px 20px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: 0 6px 18px rgba(43,17,219,0.18);
+        }
+        .add-to-inquiry:active { transform: translateY(1px); }
+        
+        .product-card > div:last-child {
+            margin-top: auto;
+        }
+
+        .inquiry-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1200;
+            opacity: 0;
+            transition: opacity 200ms ease, transform 200ms ease;
+            pointer-events: none;
         }
 
         .contact-section {
@@ -337,15 +378,15 @@
         'Panasonic Connect' => [
             'description' => 'Leading manufacturer of welding robots and automated welding systems.',
             'products' => [
-                ['model' => 'YD-350KR2', 'type' => 'Welding Robot', 'badge' => 'Popular', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-350KR2.jpg'],
+                ['model' => 'YD-350KR2', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-350KR2.jpg'],
                 ['model' => 'YD-500KR2', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-500KR2.jpg'],
-                ['model' => 'YD-600KH2', 'type' => 'Welding Robot', 'badge' => 'Heavy Duty', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-600KH2.jpg'],
+                ['model' => 'YD-600KH2', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-600KH2.jpg'],
                 ['model' => 'YD-350RX1', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-350RX1.jpg'],
                 ['model' => 'YD-350GR3', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-350GR3.jpeg'],
                 ['model' => 'YD-350VR1', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-350VR1.jpg'],
                 ['model' => 'YD-400VP1', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-400VP1.png'],
                 ['model' => 'YD-350GZ4', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/CO2,MAG,MIG Welding Machine/YD-350GZ4.jpeg'],
-                ['model' => 'YD-200BL3', 'type' => 'Welding Robot', 'badge' => 'Compact', 'image' => 'assets/brands%20items/PANASONIC/TIG Welding Machine/YC-200BL3.jpeg'],
+                ['model' => 'YD-200BL3', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/TIG Welding Machine/YC-200BL3.jpeg'],
                 ['model' => 'YD-300BZ3', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/TIG Welding Machine/YC-300BZ3.jpeg'],
                 ['model' => 'YD-300BP4', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/TIG Welding Machine/YC-300BP4.png'],
                 ['model' => 'YD-300WX4', 'type' => 'Welding Robot', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/TIG Welding Machine/YC-300WX4.jpg'],
@@ -354,7 +395,7 @@
                 ['model' => 'YP-130PF1', 'type' => 'Positioner', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic Positioner 3.jpg'],
                 ['model' => 'TM/TL G3 Series', 'type' => 'Welding System', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS WG3 Welding Robot.jpg'],
                 ['model' => 'TM/TL TAWERS Series', 'type' => 'Welding System', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS SAWP Welding Robot.jpg'],
-                ['model' => 'Super Active TAWERS', 'type' => 'Welding System', 'badge' => 'Advanced', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS SAWP Welding Robot.jpg'],
+                ['model' => 'Super Active TAWERS', 'type' => 'Welding System', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS SAWP Welding Robot.jpg'],
                 ['model' => 'TM/TL G4 Series', 'type' => 'Welding System', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS WG4 Welding Robot.jpg'],
                 ['model' => 'TM/TL TAWERS WG4 Series', 'type' => 'Welding System', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS WG4 Welding Robot.jpg'],
                 ['model' => 'Active TAWERS 4 AWP4-WG4 Series', 'type' => 'Welding System', 'badge' => '', 'image' => 'assets/brands%20items/PANASONIC/Arc Welding Robot/Panasonic TAWERS AWP4 Welding Robot - 1.png'],
@@ -373,7 +414,7 @@
             'products' => [
                 ['model' => 'BW Clip', 'type' => 'Gas Equipment', 'badge' => '', 'image' => 'assets/brands%20items/BW/BW Clip 1.jpg'],
                 ['model' => 'BW Solo', 'type' => 'Gas Equipment', 'badge' => '', 'image' => 'assets/brands%20items/BW/BW Solo 1.jpg'],
-                ['model' => 'BW Clip 4 - Low Maintenance', 'type' => 'Gas Equipment', 'badge' => 'Low Maintenance', 'image' => 'assets/brands%20items/BW/BW Clip4 - 1.jpg'],
+                ['model' => 'BW Clip 4 - Low Maintenance', 'type' => 'Gas Equipment', 'badge' => ' ', 'image' => 'assets/brands%20items/BW/BW Clip4 - 1.jpg'],
                 ['model' => 'BW Microclip XL', 'type' => 'Gas Equipment', 'badge' => '', 'image' => 'assets/brands%20items/BW/BW MicroClip XL 1.jpg'],
                 ['model' => 'BW Microclip X3', 'type' => 'Gas Equipment', 'badge' => '', 'image' => 'assets/brands%20items/BW/BW MicroClip X3 - 2.jpg'],
                 ['model' => 'BW Max XT II', 'type' => 'Gas Equipment', 'badge' => '', 'image' => 'assets/brands%20items/BW/BW Max XT II 1.jpg'],
@@ -599,14 +640,15 @@
                 </div>
             </div>
             <a href="brands.php" class="back-button">
-                <i class="bi bi-arrow-left"></i> Back to Brands
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+            <a href="inquirylist.php" class="back-button" style="margin-left:12px;">
+                <i class="bi bi-list"></i> INQUIRY LIST
             </a>
         </div>
     </header>
 
-    <!-- Brand Container -->
     <div class="brand-container">
-        <!-- Brand Header -->
         <div class="brand-header">
             <h1><?php echo $brand_name; ?></h1>
             <p><?php echo $brand_info['description']; ?></p>
@@ -635,6 +677,13 @@
                             <h4><?php echo $product; ?></h4>
                             <p>Professional grade solutions for your industrial needs</p>
                         <?php endif; ?>
+                        <div style="margin-top:auto; padding-top:15px;">
+                            <button class="add-to-inquiry" type="button"
+                                data-model="<?php echo htmlspecialchars(is_array($product) ? $product['model'] : $product, ENT_QUOTES); ?>"
+                                data-type="<?php echo htmlspecialchars(is_array($product) ? (isset($product['type']) ? $product['type'] : '') : 'Product', ENT_QUOTES); ?>"
+                                data-brand="<?php echo htmlspecialchars($brand_name, ENT_QUOTES); ?>"
+                            >ADD TO INQUIRY LIST</button>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -654,5 +703,51 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Add to Inquiry client-side handling
+        (function(){
+            function getItems(){
+                try{ return JSON.parse(localStorage.getItem('inquiryItems')||'[]'); }catch(e){ return []; }
+            }
+            function setItems(items){ localStorage.setItem('inquiryItems', JSON.stringify(items)); }
+            function addItem(item){
+                var items = getItems();
+                var found = items.find(function(i){ return i.model === item.model && i.brand === item.brand; });
+                if(found){
+                    return false; // already present
+                }
+                item.qty = 1; items.push(item);
+                setItems(items);
+                return true;
+            }
+
+            function showToast(msg){
+                var t = document.querySelector('.inquiry-toast');
+                if(!t){ t = document.createElement('div'); t.className = 'inquiry-toast'; document.body.appendChild(t); }
+                t.textContent = msg;
+                requestAnimationFrame(function(){ t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(-6px)'; });
+                clearTimeout(t._hide);
+                t._hide = setTimeout(function(){ t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(0)'; }, 1800);
+            }
+
+            document.addEventListener('click', function(e){
+                var btn = e.target.closest('.add-to-inquiry');
+                if(!btn) return;
+                var model = btn.dataset.model || '';
+                var type = btn.dataset.type || '';
+                var brand = btn.dataset.brand || '';
+                var added = addItem({ model: model, type: type, brand: brand });
+                if(!added){
+                    showToast('Product already in inquiry list');
+                    // small visual feedback on button
+                    btn.classList.add('already');
+                    setTimeout(function(){ btn.classList.remove('already'); }, 700);
+                    return;
+                }
+                btn.textContent = 'Added';
+                setTimeout(function(){ btn.textContent = 'ADD TO INQUIRY LIST'; }, 900);
+            });
+        })();
+    </script>
 </body>
 </html>

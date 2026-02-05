@@ -219,18 +219,30 @@
             display: none;
         }
 
+        
         .inquiry-btn {
-            background: #00D7B3;
-            color: #002b2b;
+            background: linear-gradient(135deg, #00D7B3 0%, #00D7B3 100%);
+            color: #1a1a2e;
             border: none;
-            padding: 10px 18px;
-            border-radius: 999px;
-            font-weight: 800;
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
-        .inquiry-btn:hover { filter: brightness(0.95); }
+        .inquiry-btn:hover { 
+            background: linear-gradient(135deg, #00E6FF 0%, #00C8F7 100%);
+            box-shadow: 0 6px 20px rgba(0, 217, 255, 0.5);
+            transform: translateY(-2px);
+        }
 
         .right-actions {
             margin-left: auto;
@@ -263,7 +275,7 @@
         .browse-toggle {
             position: absolute;
             left: 12px;
-            top: 50%;
+            top: 20%;
             transform: translateY(-50%);
             z-index: 80;
             background: transparent;
@@ -476,19 +488,204 @@
         }
 
         .sidebar-overlay h3 {
-            font-size: 16px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin-bottom: 24px;
             color: #222;
             font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .sidebar-list { list-style: none; padding: 0; margin: 0; }
-        .sidebar-list li { border-bottom: 1px solid #f3f4f6; }
-        .sidebar-list a { display:flex; gap:12px; padding:14px 6px; color:#222; text-decoration:none; align-items:center; }
-        .sidebar-list a:hover { background:#fbfdff; color:#0015d1; }
-        .sidebar-icon { color:#4a21d9; width:28px; text-align:center; }
+        .sidebar-list li { border-bottom: 1px solid #e5e7eb; }
+        .sidebar-list li:last-child { border-bottom: none; }
+        .sidebar-list a { 
+            display: flex; 
+            gap: 12px; 
+            padding: 16px 12px; 
+            color: #1f2937; 
+            text-decoration: none; 
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            font-size: 15px;
+        }
+        .sidebar-list a:hover { 
+            background: #f3f4f6; 
+            color: #2B11DB;
+            padding-left: 16px;
+        }
+        .sidebar-icon { 
+            color: #5b21b6; 
+            width: 24px; 
+            height: 24px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-        .sidebar-close { background: transparent; border: none; color:#666; font-weight:700; cursor:pointer; position:absolute; right:12px; top:12px; }
+        .sidebar-list a .sidebar-label {
+            flex: 1;
+        }
+
+        .sidebar-list a .sidebar-arrow {
+            width: 20px;
+            height: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+
+        .sidebar-list li.has-sub a .sidebar-arrow {
+            display: flex;
+        }
+
+        .sidebar-sublist { 
+            list-style: none; 
+            margin: 0; 
+            padding: 8px 0 8px 44px; 
+            display: none;
+            background: #fafafa;
+            margin-left: 12px;
+            margin-right: 12px;
+            padding-left: 16px;
+            border-left: 2px solid #e5e7eb;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        .sidebar-sublist li { 
+            padding: 4px 0; 
+            border: none;
+        }
+        .sidebar-sublist a { 
+            color: #4b5563; 
+            font-size: 14px; 
+            padding: 6px 8px; 
+            display: block; 
+            text-decoration: none;
+            justify-content: flex-start;
+        }
+        .sidebar-sublist a:hover { 
+            color: #2B11DB; 
+            background: transparent;
+            padding-left: 12px;
+        }
+
+        /* Nested sublists */
+        .sidebar-sublist li.has-nested-sub { position: relative; }
+        .sidebar-sublist li.has-nested-sub > a { padding-right: 24px; }
+        
+        .nested-toggle {
+            position: absolute;
+            right: 0;
+            top: 6px;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .nested-toggle:focus { outline: none; }
+        .nested-toggle .bi { transition: transform 200ms ease; }
+        .nested-toggle[aria-expanded="true"] .bi { transform: rotate(90deg); }
+
+        .sidebar-nested-sublist { 
+            list-style: none; 
+            margin: 10px 0 10px -12px; 
+            padding: 0; 
+            display: none;
+        }
+        .sidebar-nested-sublist li { 
+            padding: 0;
+            border: none;
+        }
+        .sidebar-nested-sublist a { 
+            color: #5a6b7d; 
+            font-size: 13px; 
+            padding: 10px 12px 10px 28px; 
+            display: block; 
+            text-decoration: none;
+            position: relative;
+            transition: all 0.25s ease;
+            border-radius: 6px;
+            margin: 2px 0;
+        }
+        .sidebar-nested-sublist a::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(135deg, #2B11DB 0%, #6d28d9 100%);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(43, 17, 219, 0.2);
+        }
+        .sidebar-nested-sublist a:hover { 
+            color: #2B11DB;
+            background: rgba(43, 17, 219, 0.08);
+            padding-left: 32px;
+            transform: translateX(4px);
+        }
+
+        .sidebar-nested-sublist.collapsed { display: none; }
+        .sidebar-nested-sublist:not(.collapsed) { display: block; }
+        .sidebar-list li.has-sub { position: relative; }
+        .has-sub > a { padding-right: 40px; }
+        .sub-toggle {
+            position: absolute;
+            right: 12px;
+            top: 16px;
+            transform: none;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .sub-toggle:focus { outline: none; }
+        .sub-toggle .bi { transition: transform 200ms ease; font-size: 16px; }
+        .sub-toggle[aria-expanded="true"] .bi { transform: rotate(90deg); }
+        .sidebar-sublist.collapsed { display: none; }
+        .sidebar-sublist:not(.collapsed) { display: block; }
+
+        .sidebar-close { 
+            background: transparent; 
+            border: none; 
+            color: #9ca3af; 
+            font-weight: 700; 
+            cursor: pointer; 
+            position: static;
+            font-size: 16px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .sidebar-close:hover { color: #333; }
 
         /* Main Content */
         .container {
@@ -760,7 +957,7 @@
     <header>
         <div class="header-top">
             <div class="logo">
-                <div class="logo-box"><img src="assets/HOME/image-removebg-preview.png" alt="Andison Industrial" /></div>
+                <div class="logo-box"><a href="home.php"><img src="assets/HOME/image-removebg-preview.png" alt="Andison Industrial" /></a></div>
             </div>
 
             <div class="search-bar">
@@ -770,7 +967,7 @@
             </div>
 
             <div class="right-actions">
-                <button class="inquiry-btn">INQUIRY LIST</button>
+                <a href="inquirylist.php" class="inquiry-btn">INQUIRY LIST</a>
                 <div class="header-contact">
                     <div class="contact-dropdown" tabindex="0" aria-haspopup="true">
                         <a href="#contact" class="contact-link" aria-label="Contact Us">Contact Us ▾</a>
@@ -890,19 +1087,94 @@
     <!-- Sidebar overlay -->
     <div id="overlay" class="overlay-backdrop" aria-hidden="true"></div>
     <aside id="sidebar" class="sidebar-overlay" aria-hidden="true">
-        <button class="sidebar-close" id="closeSidebar">✕</button>
-        <h3>Categories</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 12px; border-bottom: 1px solid #e5e7eb;">
+            <h3 style="margin: 0; font-size: 18px; color: #1f2937;">Categories</h3>
+            <button class="sidebar-close" id="closeSidebar">✕</button>
+        </div>
         <ul class="sidebar-list">
-            <li><a href="#arc-handmetal-machine"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span> Arc HandMetal Machine</a></li>
-            <li><a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span> Arc HandMetal Robots</a></li>
-            <li><a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-battery-half"></i></span> Batteries</a></li>
-            <li><a href="#drilling-lifting"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-wrench"></i></span> Drilling and Lifting</a></li>
-            <li><a href="#gas-detectors"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span> Portable Gas Detectors</a></li>
-            <li><a href="#ventilators"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span> Portable Ventilators</a></li>
-            <li><a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span> Power Tools</a></li>
-            <li><a href="#protection-safety"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span> Protection and Safety</a></li>
-            <li><a href="#handmetal-accessories"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span> HandMetal Accessories</a></li>
-            <li><a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span> HandMetal Consumables</a></li>
+            <li class="has-sub">
+                <a href="arc-welding-machine/arc-welding-machine.php"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-lightning-charge"></i></span><span class="sidebar-label">Arc Welding Machine</span></a>
+                <button class="sub-toggle" aria-expanded="false" aria-controls="sub-arc-welding" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                <ul id="sub-arc-welding" class="sidebar-sublist collapsed">
+                    <li><a href="arc-welding-machine/mig-welding-machine.php">MIG Welding Machine</a></li>
+                    <li><a href="arc-welding-machine/co1-mag-welding-machine.php">CO1/MAG Welding Machine</a></li>
+                    <li><a href="arc-welding-machine/stud-welding-machine.php">STUD Welding Machine</a></li>
+                    <li><a href="arc-welding-machine/tig-welding-machine.php">TIG Welding Machine</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#arc-handmetal-robots"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-robot"></i></span><span class="sidebar-label">Arc HandMetal Robots</span><span class="sidebar-arrow"><i class="bi bi-chevron-right"></i></span></a>
+            </li>
+            <li>
+                <a href="#batteries"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-lightning-fill"></i></span><span class="sidebar-label">Batteries</span><span class="sidebar-arrow"><i class="bi bi-chevron-right"></i></span></a>
+            </li>
+            <li class="has-sub">
+                <a href="drilling-and-lifting/drilling-and-lifting.php"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-hammer"></i></span><span class="sidebar-label">Drilling and Lifting</span></a>
+                <button class="sub-toggle" aria-expanded="false" aria-controls="sub-drilling-lifting" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                <ul id="sub-drilling-lifting" class="sidebar-sublist collapsed">
+                    <li><a href="drilling-and-lifting/lifting.php">Lifting</a></li>
+                    <li><a href="drilling-and-lifting/magnetic-drill.php">Magnetic Drill</a></li>
+                    <li><a href="drilling-and-lifting/cutters.php">Cutters</a></li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="gas-detectors/portable-gas-detectors.php"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-bullseye"></i></span><span class="sidebar-label">Portable Gas Detectors</span></a>
+                <button class="sub-toggle" aria-expanded="false" aria-controls="sub-gas-detectors" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                <ul id="sub-gas-detectors" class="sidebar-sublist collapsed">
+                    <li><a href="gas-detectors/single-gas-detector.php">Single Gas Detector</a></li>
+                    <li><a href="gas-detectors/multi-gas-detector.php">Multi Gas Detector</a></li>
+                    <li><a href="gas-detectors/docking-data-management.php">Docking and Data Management</a></li>
+                    <li><a href="gas-detectors/calibration-gas-regulators.php">Calibration Gas and Regulators</a></li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="portable-ventilators/portable-ventilators.php"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-fan"></i></span><span class="sidebar-label">Portable Ventilators</span></a>
+                <button class="sub-toggle" aria-expanded="false" aria-controls="sub-ventilators" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                <ul id="sub-ventilators" class="sidebar-sublist collapsed">
+                    <li><a href="portable-ventilators/portable-ventilator-accessories.php">Portable Ventilator Accessories</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#power-tools"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-tools"></i></span><span class="sidebar-label">Power Tools</span><span class="sidebar-arrow"><i class="bi bi-chevron-right"></i></span></a>
+            </li>
+            <li class="has-sub">
+                <a href="protection/protection.php"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-shield-check"></i></span><span class="sidebar-label">Protection and Safety</span></a>
+                <button class="sub-toggle" aria-expanded="false" aria-controls="sub-protection-safety" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                <ul id="sub-protection-safety" class="sidebar-sublist collapsed">
+                    <li><a href="protection/eye-protection.php">Eye Protection</a></li>
+                    <li><a href="protection/foot-protection.php">Foot Protection</a></li>
+                    <li class="has-nested-sub">
+                        <a href="protection/hand-protection.php">Hand Protection</a>
+                        <button class="nested-toggle" aria-expanded="false" aria-controls="nested-hand-protection" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                        <ul id="nested-hand-protection" class="sidebar-nested-sublist collapsed">
+                            <li><a href="protection/working-gloves.php">Working Gloves</a></li>
+                            <li><a href="protection/chemical-liquid-protection-gloves.php">Chemical and Liquid Protection Gloves</a></li>
+                            <li><a href="protection/disposable-gloves.php">Disposable Gloves</a></li>
+                            <li><a href="protection/welding-gloves.php">Welding Gloves</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="protection/hearing-respiratory-protection.php">Hearing &amp; Respiratory Protection</a></li>
+                    <li class="has-nested-sub">
+                        <a href="protection/body-protection.php">Body Protection</a>
+                        <button class="nested-toggle" aria-expanded="false" aria-controls="nested-body-protection" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                        <ul id="nested-body-protection" class="sidebar-nested-sublist collapsed">
+                            <li><a href="protection/chemical-flame-retardant.php">Chemical and Flame Retardant</a></li>
+                            <li><a href="protection/liquid-spray-splash.php">Liquid Spray and Splash</a></li>
+                            <li><a href="protection/particulate-low-hazard.php">Particulate and Low Hazard</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="welding-accessories/welding-accessories.php"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-gear"></i></span><span class="sidebar-label">Welding Accessories</span></a>
+                <button class="sub-toggle" aria-expanded="false" aria-controls="sub-welding-accessories" title="Toggle subcategories"><i class="bi bi-chevron-right"></i></button>
+                <ul id="sub-welding-accessories" class="sidebar-sublist collapsed">
+                    <li><a href="welding-accessories/welding-head-face-protection.php">Welding, Head & Face Protection</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#handmetal-consumables"><span class="sidebar-icon" aria-hidden="true"><i class="bi bi-box"></i></span><span class="sidebar-label">HandMetal Consumables</span><span class="sidebar-arrow"><i class="bi bi-chevron-right"></i></span></a>
+            </li>
         </ul>
     </aside>
 
@@ -1147,6 +1419,83 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        // Sidebar sublist toggle behavior with persistent state
+        (function(){
+            var toggles = document.querySelectorAll('.sub-toggle');
+            toggles.forEach(function(btn){
+                var targetId = btn.getAttribute('aria-controls');
+                var list = document.getElementById(targetId);
+                if(!list) return;
+                var storageKey = 'sidebar_sub_' + targetId;
+                try {
+                    var stored = localStorage.getItem(storageKey);
+                    if(stored === 'true'){
+                        btn.setAttribute('aria-expanded','true');
+                        list.classList.remove('collapsed');
+                    } else {
+                        btn.setAttribute('aria-expanded','false');
+                        list.classList.add('collapsed');
+                    }
+                } catch(e){
+                    btn.setAttribute('aria-expanded','false');
+                    list.classList.add('collapsed');
+                }
+
+                btn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    var expanded = btn.getAttribute('aria-expanded') === 'true';
+                    if(expanded){
+                        btn.setAttribute('aria-expanded','false');
+                        list.classList.add('collapsed');
+                        try { localStorage.setItem(storageKey,'false'); } catch(e){}
+                    } else {
+                        btn.setAttribute('aria-expanded','true');
+                        list.classList.remove('collapsed');
+                        try { localStorage.setItem(storageKey,'true'); } catch(e){}
+                    }
+                });
+            });
+        })();
+        // Nested sublist toggle behavior
+        (function(){
+            var nestedToggles = document.querySelectorAll('.nested-toggle');
+            nestedToggles.forEach(function(btn){
+                var targetId = btn.getAttribute('aria-controls');
+                var list = document.getElementById(targetId);
+                if(!list) return;
+                var storageKey = 'sidebar_nested_' + targetId;
+                try {
+                    var stored = localStorage.getItem(storageKey);
+                    if(stored === 'true'){
+                        btn.setAttribute('aria-expanded','true');
+                        list.classList.remove('collapsed');
+                    } else {
+                        btn.setAttribute('aria-expanded','false');
+                        list.classList.add('collapsed');
+                    }
+                } catch(e){
+                    btn.setAttribute('aria-expanded','false');
+                    list.classList.add('collapsed');
+                }
+
+                btn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    var expanded = btn.getAttribute('aria-expanded') === 'true';
+                    if(expanded){
+                        btn.setAttribute('aria-expanded','false');
+                        list.classList.add('collapsed');
+                        try { localStorage.setItem(storageKey,'false'); } catch(e){}
+                    } else {
+                        btn.setAttribute('aria-expanded','true');
+                        list.classList.remove('collapsed');
+                        try { localStorage.setItem(storageKey,'true'); } catch(e){}
+                    }
+                });
+            });
+        })();
     </script>
     </body>
 </html>
