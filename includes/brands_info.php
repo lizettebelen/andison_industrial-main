@@ -233,6 +233,22 @@ if (!function_exists('andison_get_brands_info')) {
                     ['model' => 'TruckMaster', 'type' => 'Battery', 'badge' => '', 'image' => 'assets/brands%20items/MOTOLITE/Truckmaster.png'],
                 ],
             ],
+            'Dryrod' => [
+                'description' => 'Professional welding consumables and electrodes.',
+                'products' => [
+                    ['model' => 'DryRod Electrodes', 'type' => 'Welding Consumable', 'badge' => '', 'image' => 'assets/brands%20items/DRYROD/electrodes-1.jpg'],
+                    ['model' => 'DryRod Flux Cored Wire', 'type' => 'Welding Consumable', 'badge' => '', 'image' => ''],
+                    ['model' => 'DryRod Solid Wire', 'type' => 'Welding Consumable', 'badge' => '', 'image' => ''],
+                ],
+            ],
+            'Weiler' => [
+                'description' => 'Abrasive tools and grinding solutions.',
+                'products' => [
+                    ['model' => 'Weiler Grinding Wheel', 'type' => 'Abrasive Tool', 'badge' => '', 'image' => ''],
+                    ['model' => 'Weiler Wire Brush', 'type' => 'Abrasive Tool', 'badge' => '', 'image' => ''],
+                    ['model' => 'Weiler Flap Disc', 'type' => 'Abrasive Tool', 'badge' => '', 'image' => ''],
+                ],
+            ],
         ];
     }
 }
